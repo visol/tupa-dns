@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>TUPA system information templates</title>
+</head>
+<body>
+
+
+
+
+<!-- ###SHORT_SYSINFO### begin -->
+<table cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td>###LABEL_HOSTNAME###</td>
+		<td width="5">&nbsp</td>
+		<td>###HOSTNAME###</td>
+		<td valign="bottom" rowspan="4">###SHOW_DETAILS###</td>
+	</tr>
+	<tr>
+		<td>###LABEL_UPTIME###</td>
+		<td width="5">&nbsp</td>
+		<td>###UPTIME###</td>
+	</tr>
+	<tr>
+		<td>###LABEL_LOADAVG###</td>
+		<td width="5">&nbsp</td>
+		<td>###LOADAVG###</td>
+	</tr>
+	<tr>
+		<td>###LABEL_PDNS_STATE###</td>
+		<td width="5">&nbsp</td>
+		<td>###PDNS_STATE###</td>
+	</tr>	
+</table>
+<!-- ###SHORT_SYSINFO### end -->
+
+
+
+
+
+
+
+
+
+<!-- ###DETAILED_SYSINFO### begin -->
+###REGISTER_NAVIGATION###
+<!-- ###TAB_sysinfoSystem### begin -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="sysinfoBox">
+	<tr>
+		<td colspan="2" class="sysinfoBoxHeader">System overview</td>
+	</tr>
+	<tr>
+		<td class="sysinfoBoxBody">
+			<table cellspacing="0" cellpadding="0" border="0">
+				<tr>
+					<td>###LABEL_PDNS_STATE###</td>
+					<td>###PDNS_STATE###</td>
+				</tr>
+				<tr>
+					<td>###LABEL_HOSTNAME###</td>
+					<td>###HOSTNAME###</td>
+				</tr>
+				<tr>
+					<td>###LABEL_IP###</td>
+					<td>###IP###</td>
+				</tr>
+				<tr>
+					<td>###LABEL_KERNEL###</td>
+					<td>###KERNEL### (###DISTRO###)</td>
+				</tr>
+				<tr>
+					<td>###LABEL_UPTIME###</td>
+					<td>###UPTIME###</td>
+				</tr>
+				<tr>
+					<td>###LABEL_LOADAVG###</td>
+					<td>###LOADAVG###</td>
+				</tr>
+			</table>
+		</td>
+		<td valign="top" align="right">
+			###DISTROICON###
+		</td>
+	</tr>
+</table>
+<br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="sysinfoBox">
+	<tr>
+		<td class="sysinfoBoxHeader">###LABEL_MEMORY###</td>
+	</tr>
+	<tr>
+		<td class="sysinfoBoxBody">
+			###MEMORY###
+		</td>
+	</tr>
+</table>
+<br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="sysinfoBox">
+	<tr>
+		<td class="sysinfoBoxHeader">###LABEL_FILESYSTEM###</td>
+	</tr>
+	<tr>
+		<td class="sysinfoBoxBody">
+			###FILESYSTEM###
+		</td>
+	</tr>
+</table>
+<br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="sysinfoBox">
+	<tr>
+		<td class="sysinfoBoxHeader">###LABEL_NETWORK###</td>
+	</tr>
+	<tr>
+		<td class="sysinfoBoxBody">
+			###NETWORK###
+		</td>
+	</tr>
+</table>
+<br />
+<!-- ###TAB_sysinfoSystem### end -->
+<!-- ###TAB_sysinfoPdns### begin -->
+<table width="100%" cellspacing="0" cellpadding="0" border="0" class="sysinfoBox">
+	<tr>
+		<td class="sysinfoBoxHeader">###LABEL_PDNS###</td>
+	</tr>
+	<tr>
+		<td class="sysinfoBoxBody">
+			###PDNS_QUERIES###
+			###PDNS_LATENCY###
+		</td>
+	</tr>
+</table>
+<!-- ###TAB_sysinfoPdns### end -->
+<!-- ###DETAILED_SYSINFO### end -->
+
+
+</body>
+</html>

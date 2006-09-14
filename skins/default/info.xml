@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<skin>
+	<name>Default</name>			<!-- Displayed name in user preferences. -->
+	<author>Urs Weiss</author>		<!-- Your name. -->
+	<email>urs(AT)tupa-dns.org</email>	<!-- Your eMail address. So i can contact you if something importand changed in new version. -->
+	<version_tstamp>1147766455</version_tstamp>
+</skin>

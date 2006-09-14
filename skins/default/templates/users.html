@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>TUPA user templates</title>
+</head>
+<body>
+
+
+<!-- ###USER_ADD_EDIT### begin -->
+###REGISTER_NAVIGATION###
+<!-- ###TAB_userPersonal### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td colspan="2" class="###TITLE_STYLE###">###PERSONAL_SUBTITLE###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_USERNAME###</td>
+		<td>###INPUT_USERNAME###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_PASSWORD###</td>
+		<td>###INPUT_PASSWORD###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_CPASSWORD###</td>
+		<td>###INPUT_CPASSWORD###</td>
+	</tr>
+	<!-- ###USER_ADD_EDIT_GROUP### begin -->
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_GROUP###</td>
+		<td>###SELECT_GROUP###</td>
+	</tr>
+	<!-- ###USER_ADD_EDIT_GROUP### end -->
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_NAME###</td>
+		<td>###INPUT_NAME###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_FIRSTNAME###</td>
+		<td>###INPUT_FIRSTNAME###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_EMAIL###</td>
+		<td>###INPUT_EMAIL###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###" valign="top">###LABEL_NOTICE###</td>
+		<td>###TEXTAREA_NOTICE###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+</table>
+<!-- ###TAB_userPersonal### end -->
+<!-- ###TAB_userLimits### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td colspan="2" class="###TITLE_STYLE###">###LIMITS_SUBTITLE###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MAX_DOMAINS###</td>
+		<td>###INPUT_MAX_DOMAINS###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MAX_TEMPLATES###</td>
+		<td>###INPUT_MAX_TEMPLATES###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+</table>
+<!-- ###TAB_userLimits### end -->
+<!-- ###TAB_userPermissions### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<!-- ###PERM_ADMIN_GROUP### begin -->
+	<tr>
+		<td colspan="2" class="###TITLE_STYLE###">###PERM_ADMIN_SUBTITLE###</td>
+	</tr>
+	<!-- ###PERM_ADMIN### begin -->
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_PERM_ADMIN###</td>
+		<td>###INPUT_PERM_ADMIN###</td>
+	</tr>
+	<!-- ###PERM_ADMIN### end -->
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_PERM_ADMIN_USER###</td>
+		<td>###INPUT_PERM_ADMIN_USER###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_PERM_ADMIN_DOMAIN###</td>
+		<td>###INPUT_PERM_ADMIN_DOMAIN###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="5" /></td>
+	</tr>
+	<!-- ###PERM_ADMIN_GROUP### end -->
+	<tr>
+		<td colspan="2">
+			<table width="100%" cellpadding="0" cellspacing="0" class="form-table">
+				<tr>
+					<td colspan="2" class="###TITLE_STYLE###">###PERM_USR_SUBTITLE###</td>
+				</tr>
+				<tr>
+					<td width="1%" class="###TEXT_STYLE###"><strong>###LABEL_PERM_ALL###</strong></td>
+					<td>###INPUT_PERM_USR_ALL###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_SHOW###</td>
+					<td>###INPUT_PERM_USR_SHOW###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_ADD###</td>
+					<td>###INPUT_PERM_USR_ADD###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_EDIT###</td>
+					<td>###INPUT_PERM_USR_EDIT###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_DELETE###</td>
+					<td>###INPUT_PERM_USR_DELETE###</td>
+				</tr>
+			</table>
+		</td>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="5" /></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+			<table width="100%" cellpadding="0" cellspacing="0" class="form-table">
+				<tr>
+					<td width="50%" colspan="2" class="###TITLE_STYLE###">###PERM_DOM_SUBTITLE###</td>
+					<td width="50%" colspan="2" class="###TITLE_STYLE_RIGHT###">###PERM_DOM_GROUP_SUBTITLE###</td>
+				</tr>
+				<tr>
+					<td width="1%" class="###TEXT_STYLE###"><strong>###LABEL_PERM_ALL###</strong></td>
+					<td>###INPUT_PERM_DOM_ALL###</td>
+					<td width="1%" class="###TEXT_STYLE_RIGHT###"><strong>###LABEL_PERM_ALL###</strong></td>
+					<td>###INPUT_PERM_DOMGROUP_ALL###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_SHOW###</td>
+					<td>###INPUT_PERM_DOM_SHOW###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_SHOW###</td>
+					<td>###INPUT_PERM_DOMGROUP_SHOW###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_ADD###</td>
+					<td>###INPUT_PERM_DOM_ADD###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_ADD###</td>
+					<td>###INPUT_PERM_DOMGROUP_ADD###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_EDIT###</td>
+					<td>###INPUT_PERM_DOM_EDIT###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_EDIT###</td>
+					<td>###INPUT_PERM_DOMGROUP_EDIT###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_DELETE###</td>
+					<td>###INPUT_PERM_DOM_DELETE###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_DELETE###</td>
+					<td>###INPUT_PERM_DOMGROUP_DELETE###</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="5" /></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+			<table width="100%" cellpadding="0" cellspacing="0" class="form-table">
+				<tr>
+					<td width="50%" colspan="2" class="###TITLE_STYLE###">###PERM_TMPL_SUBTITLE###</td>
+					<td width="50%" colspan="2" class="###TITLE_STYLE_RIGHT###">###PERM_TMPL_GROUP_SUBTITLE###</td>
+				</tr>
+				<tr>
+					<td width="1%" class="###TEXT_STYLE###"><strong>###LABEL_PERM_ALL###</strong></td>
+					<td>###INPUT_PERM_TMPL_ALL###</td>
+					<td width="1%" class="###TEXT_STYLE_RIGHT###"><strong>###LABEL_PERM_ALL###</strong></td>
+					<td>###INPUT_PERM_TMPLGROUP_ALL###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_SHOW###</td>
+					<td>###INPUT_PERM_TMPL_SHOW###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_SHOW###</td>
+					<td>###INPUT_PERM_TMPLGROUP_SHOW###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_ADD###</td>
+					<td>###INPUT_PERM_TMPL_ADD###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_ADD###</td>
+					<td>###INPUT_PERM_TMPLGROUP_ADD###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_EDIT###</td>
+					<td>###INPUT_PERM_TMPL_EDIT###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_EDIT###</td>
+					<td>###INPUT_PERM_TMPLGROUP_EDIT###</td>
+				</tr>
+				<tr>
+					<td class="###TEXT_STYLE###">###LABEL_PERM_DELETE###</td>
+					<td>###INPUT_PERM_TMPL_DELETE###</td>
+					<td class="###TEXT_STYLE_RIGHT###">###LABEL_PERM_DELETE###</td>
+					<td>###INPUT_PERM_TMPLGROUP_DELETE###</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+</table>
+<!-- ###TAB_userPermissions### end -->
+###USER_PREFERENCES###
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td colspan="2">###SUBMIT_BUTTON### ###HIDDEN_FIELDS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="20" /></td>
+	</tr>
+</table>
+<!-- ###USER_ADD_EDIT### end -->
+
+
+
+
+
+
+
+<!-- ###USER_DELETE### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<!-- ###USER_DELETE_DIRECT### begin -->
+	<tr>
+		<td colspan="2" class="###TEXT_STYLE###">###NO_TD###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="10" /></td>
+	</tr>
+	<!-- ###USER_DELETE_DIRECT### end -->
+	<!-- ###USER_DELETE_TEMPLATES### begin -->
+	<tr id="form-templates">
+		<td colspan="2" class="###TITLE_STYLE###">###TEMPLATES_SUBTITLE###</td>
+	</tr>
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###">###LABEL_DELETE_TEMPLATES###</td>
+		<td>###INPUT_DELETE_TEMPLATES###</td>
+	</tr>
+	<!-- ###USER_MOVE_TEMPLATES_GROUP### begin -->
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###" valign="top">###LABEL_MOVE_TEMPLATES###</td>
+		<td>###SELECT_MOVE_TEMPLATES_GRP###</td>
+	</tr>
+	<!-- ###USER_MOVE_TEMPLATES_GROUP### end -->
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###">###LABEL_MOVE_TEMPLATES2###</td>
+		<td>###SELECT_MOVE_TEMPLATES###</td>
+	</tr>
+	<tr id="form-templates">
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<!-- ###USER_DELETE_TEMPLATES### end -->
+	<!-- ###USER_DELETE_DOMAINS### begin -->
+	<tr id="form-domains">
+		<td colspan="2" class="###TITLE_STYLE###">###DOMAINS_SUBTITLE###</td>
+	</tr>
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###">###LABEL_DELETE_DOMAINS###</td>
+		<td>###INPUT_DELETE_DOMAINS###</td>
+	</tr>
+	<!-- ###USER_MOVE_DOMAINS_GROUP### begin -->
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###">###LABEL_MOVE_DOMAINS###</td>
+		<td>###SELECT_MOVE_DOMAINS_GRP###</td>
+	</tr>
+	<!-- ###USER_MOVE_DOMAINS_GROUP### end -->
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###" valign="top">###LABEL_MOVE_DOMAINS2###</td>
+		<td>###SELECT_MOVE_DOMAINS###</td>
+	</tr>
+	<tr id="form-domains">
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<!-- ###USER_DELETE_DOMAINS### end -->
+	<!-- ###USER_DELETE_ALL### begin -->
+	<tr>
+		<td colspan="2" class="###TEXT_STYLE###">###DELETE_ALL_LINKS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="10" /></td>
+	</tr>
+	<!-- ###USER_DELETE_ALL### end -->
+	<tr>
+		<td colspan="2">###SUBMIT_BUTTON### ###HIDDEN_FIELDS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="20" /></td>
+	</tr>
+</table>
+<!-- ###USER_DELETE### end -->
+
+
+
+
+
+<!-- ###USER_MOVE### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table" id="form-table">
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MOVE_USERS###</td>
+		<td>###SELECT_MOVE_USERS_GRP###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<tr>
+		<td colspan="2">###SUBMIT_BUTTON### ###HIDDEN_FIELDS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="20" /></td>
+	</tr>
+</table>
+<!-- ###USER_MOVE### end -->
+
+
+
+
+
+
+</body>
+</head>

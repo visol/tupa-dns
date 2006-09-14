@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>TUPA login templates</title>
+</head>
+<body>
+
+
+
+
+<!-- ###TUPA_LOGIN### begin -->
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	###META_GENERATOR###
+	<title>###PAGE_TITLE###</title>
+	###STYLE_SHEET###
+	
+	###JS_MD5###
+	###JS_CRYPT_PASS###
+	###JS_HASH_TIMER###
+</head>
+
+<body id="index-php">
+	<form action="index.php" method="post" name="loginform" onsubmit="cryptPass();">
+		<div id="barpos">		
+			<table id="bar" cellspacing="0" cellpadding="0">
+				###MAINTENANCE_MESSAGE###
+				###BROWSER_WARNING###
+				<tr> 
+					<td width="1" class="loginbar">
+						###LOGIN_IMAGE###
+					</td>
+					<td class="loginbar">
+						<table id="loginbox" cellspacing="0" cellpadding="0">
+							###DIV_ERROR###
+							<tr> 
+								<td><p class="username">###LABEL_USERNAME###</p></td>
+								<td><input type="text" name="username" value="###VALUE_USERNAME###" /></td>
+		
+							</tr>
+							<tr> 
+								<td><p class="password">###LABEL_PASSWORD###</p></td>
+								<td><input type="password" name="password" /></td>
+							</tr>
+							<tr> 
+								<td>&nbsp;</td>
+								<td><input type="submit" name="login" value="###SUBMIT_VALUE###" />###HIDDEN_FIELDS###</td>
+							</tr>
+							<tr> 
+								<td colspan="2"><p class="info">###COOKIE_WARNING###</p></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+				<tr> 
+					<td align="center" colspan="2">
+						<div id="copyright">###COPYRIGHT###</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		###JS_FIELD_FOCUS###
+	</form>
+</body>
+</html>
+<!-- ###TUPA_LOGIN### end -->
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>TUPA group templates</title>
+</head>
+<body>
+
+
+
+
+<!-- ###GROUP_ADD_EDIT### begin -->
+###REGISTER_NAVIGATION###
+<!-- ###TAB_groupGeneral### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_GROUPNAME###</td>
+		<td>###INPUT_GROUPNAME###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_SOA_PRIMARY###</td>
+		<td>###INPUT_SOA_PRIMARY###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###" valign="top">###LABEL_NOTICE###</td>
+		<td>###TEXTAREA_NOTICE###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+</table>
+<!-- ###TAB_groupGeneral### end -->
+<!-- ###TAB_groupLimits### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td colspan="2" class="###TITLE_STYLE###">###LIMITS_SUBTITLE###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MAX_USERS###</td>
+		<td>###INPUT_MAX_USERS###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MAX_DOMAINS###</td>
+		<td>###INPUT_MAX_DOMAINS###</td>
+	</tr>
+	<tr>
+		<td class="###TEXT_STYLE###">###LABEL_MAX_TEMPLATES###</td>
+		<td>###INPUT_MAX_TEMPLATES###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+</table>
+<!-- ###TAB_groupLimits### end -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<tr>
+		<td colspan="2">###SUBMIT_BUTTON### ###HIDDEN_FIELDS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="20" /></td>
+	</tr>
+</table>
+<!-- ###GROUP_ADD_EDIT### end -->
+
+
+
+
+
+
+
+<!-- ###GROUP_DELETE### begin -->
+<table cellpadding="0" cellspacing="0" class="form-table">
+	<!-- ###GROUP_DELETE_DIRECT### begin -->
+	<tr>
+		<td colspan="2" class="###TEXT_STYLE###">###NO_UTD###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="10" /></td>
+	</tr>
+	<!-- ###GROUP_DELETE_DIRECT### end -->
+	<!-- ###GROUP_DELETE_USERS### begin -->
+	<tr id="form-users">
+		<td colspan="2" class="###TITLE_STYLE###">###USERS_SUBTITLE###</td>
+	</tr>
+	<tr id="form-users">
+		<td class="###TEXT_STYLE###">###LABEL_DELETE_USERS###</td>
+		<td>###INPUT_DELETE_USERS###</td>
+	</tr>
+	<tr id="form-users">
+		<td class="###TEXT_STYLE###">###LABEL_MOVE_USERS###</td>
+		<td>###SELECT_MOVE_USERS_GRP###</td>
+	</tr>
+	<tr id="form-users">
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<!-- ###GROUP_DELETE_USERS### end -->
+	<!-- ###GROUP_DELETE_TEMPLATES### begin -->
+	<tr id="form-templates">
+		<td colspan="2" class="###TITLE_STYLE###">###TEMPLATES_SUBTITLE###</td>
+	</tr>
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###">###LABEL_DELETE_TEMPLATES###</td>
+		<td>###INPUT_DELETE_TEMPLATES###</td>
+	</tr>
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###" valign="top">###LABEL_MOVE_TEMPLATES###</td>
+		<td>###SELECT_MOVE_TEMPLATES_GRP###</td>
+	</tr>
+	<tr id="form-templates">
+		<td class="###TEXT_STYLE###">&nbsp;</td>
+		<td>###SELECT_MOVE_TEMPLATES###</td>
+	</tr>
+	<tr id="form-templates">
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<!-- ###GROUP_DELETE_TEMPLATES### end -->
+	<!-- ###GROUP_DELETE_DOMAINS### begin -->
+	<tr id="form-domains">
+		<td colspan="2" class="###TITLE_STYLE###">###DOMAINS_SUBTITLE###</td>
+	</tr>
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###">###LABEL_DELETE_DOMAINS###</td>
+		<td>###INPUT_DELETE_DOMAINS###</td>
+	</tr>
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###">###LABEL_MOVE_DOMAINS###</td>
+		<td>###SELECT_MOVE_DOMAINS_GRP###</td>
+	</tr>
+	<tr id="form-domains">
+		<td class="###TEXT_STYLE###" valign="top">&nbsp;</td>
+		<td>###SELECT_MOVE_DOMAINS###</td>
+	</tr>
+	<tr id="form-domains">
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="15" /></td>
+	</tr>
+	<!-- ###GROUP_DELETE_DOMAINS### end -->
+	<!-- ###GROUP_DELETE_ALL### begin -->
+	<tr>
+		<td colspan="2" class="###TEXT_STYLE###">###DELETE_ALL_LINKS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="10" /></td>
+	</tr>
+	<!-- ###GROUP_DELETE_ALL### end -->
+	<tr>
+		<td colspan="2">###SUBMIT_BUTTON### ###HIDDEN_FIELDS###</td>
+	</tr>
+	<tr>
+		<td height="1" colspan="2"><img src="images/clear.gif" width="1" height="20" /></td>
+	</tr>
+</table>
+<!-- ###GROUP_DELETE### end -->
+
+
+
+
+
+
+</body>
+</html>

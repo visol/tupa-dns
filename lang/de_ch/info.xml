@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+	<name>Deutsch (Schweiz)</name>
+	<name_en>German (Switzerland)</name_en>
+	<author>
+		<name>Urs Weiss</name>
+		<email>urs(AT)tupa-dns.org</email>
+	</author>
+	<version_tstamp>0</version_tstamp>
+	<version_check>0.1-rc1</version_check>
+</language>

@@ -1,0 +1,257 @@
+2006-09-14	Urs Weiss	<urs@tupa-dns.org>
+	- Added top level domains (cat, jobs, mobi, pro, tel, travel)
+
+2006-06-27	Urs Weiss	<urs@tupa-dns.org>
+	- Replaced update of domain and template records. Now the records are updated, and not deleted and recreated anymore.
+
+2006-06-20	Urs Weiss	<urs@tupa-dns.org>
+	- Added PHP extesnions "pcre" and "session" to installers extension check
+
+2006-06-19	Urs Weiss	<urs@tupa-dns.org>
+	- Moved Language- and Skin- Manager to system menu
+	- Finished configuration manager
+
+2006-06-09	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug in multiple selection feature
+	- JS message of the multiple delete feature now shows the count of selected domains/templates
+
+2006-06-08	Urs Weiss	<urs@tupa-dns.org>
+	- Extedned redirect function of class.userauth.php with a falback if called from subdirectory
+	- Made check of TLD's case-insensitive
+	- Made transfered size of JS-files smaller by removing comments, line breakes, tabulators on output and removed unneeded fValidate functions (in summary 30% less transfer: before: 187kb ; after: 132kb)
+	- Fixed some stupid typos
+	- Added PowerDNSs "Fancy records" types (MBOXFW, URL)
+	- Added "allow_url_fopen=1" to requirements page of the installer
+	- Raised default upper threshold of sysinfo to 2 (was 0.25 before for testing)
+
+2006-06-06	Urs Weiss	<urs@tupa-dns.org>
+	- Added handling of multiple selection boxes to JS
+
+2006-06-02	Urs Weiss	<urs@tupa-dns.org>
+	- Finished Skin manager (on tupa-dns.org) and integrated skin manager into existing language manager to handle both
+
+2006-06-01	Urs Weiss	<urs@tupa-dns.org>
+	- Added functions to lib_div class to handle tar files without commandline tar
+
+2006-05-30	Urs Weiss	<urs@tupa-dns.org>
+	- Replaced all (not animated) gif files of design with png's
+	- Fixed two more IE bugs (Error after first login / JavaScript error)
+
+2006-05-29	Urs Weiss	<urs@tupa-dns.org>
+	- Added global debug function "debug($var)"
+
+2006-05-19	Urs Weiss	<urs@tupa-dns.org>
+	- Added IE 7 (beta 2) to list of supported browsers
+
+2006-05-18	Urs Weiss	<urs@tupa-dns.org>
+	- Finished online translation tool (on tupa-dns.org) and integrated language manager
+
+2006-05-10	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed some more small bugs
+
+2006-05-09	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed some XHTML warnings/errors
+	- Fixed a lot of small bugs (and two reported ones: SF Bug-ID: 1460721, 1451081)
+
+2006-04-27	Urs Weiss	<urs@tupa-dns.org>
+	- Added menu point for new "tools" section
+	- Removed tabs configuration
+
+2006-04-21	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed false JS parsing of values (SF Bug-ID: 1469065)
+
+2006-04-08	Urs Weiss	<urs@tupa-dns.org>
+	- Added "eu" to list of allowed Top-Level-Domains
+
+2006-03-03	Urs Weiss	<urs@tupa-dns.org>
+	- Changed cron/rrd demonstration option in config_default.php to false
+
+2006-02-28	Urs Weiss	<urs@tupa-dns.org>
+	- Added xml extension to installers requirement page
+	- moved pdns()-function from "lib/sysinfo/class.Linux.inc.php" to "lib/class_tupa_sysinfo.php" because this works on all platforms
+	- Wrote new kernel()-function for FreeBSD pdns statistics
+	- Fixed a bug in tabs (registers) handling
+	- Fixed some bugs with FreeBSD systems (Thanks to Evren)
+	- Fixed PTR regex check
+
+#### TUPA 0.1-rc1 release ####
+
+2006-02-27	Urs Weiss	<urs@tupa-dns.org>
+	- Replaced all gif files in "skins/default/images/icons" with png's for transparency support
+	- Impemented transparency fix in "lib/js/tableEdit.php" and detailed sysinfo
+	- Fixed some CSS for IE
+
+2006-02-26	Urs Weiss	<urs@tupa-dns.org>
+	- Integrated IE trancparency fix from Justin Koivisto (http://koivi.com/ie-png-transparency/)
+
+2006-02-21	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug in log navigation
+	- Greek language file updated
+	- Found and fixed bug in greek jsCalendar translation. Reported to jsCalendars bug tracker (SF Bug-ID: 1435932)
+
+2006-02-09	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug: If a user (user1) can edit group domains (f.ex. owned by user2), the owner of domain changed from user2 to user1 which is (was) very bad (Same for templates)
+	- Fixed bug in displaying of user permissions
+	- Fixed calculation bug in backup restore function
+
+2006-02-03	Urs Weiss	<urs@tupa-dns.org>
+	- Finished updating of german translations
+
+2006-02-02	Urs Weiss	<urs@tupa-dns.org>
+	- Modified checkFiles function in installer to support more checks
+
+2006-01-31	Urs Weiss	<urs@tupa-dns.org>
+	- Finished crontab script which updates pdns-stats and executes backup task
+
+2006-01-25	Urs Weiss	<urs@tupa-dns.org>
+	- Changed href="#" to href="javascript: void(0);" everywhere to prevents it jumping to top of page
+
+2006-01-23	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed a bug in logging-filters where group=>user filter does not work correctly
+	- Added some missing record types: HINFO, RP, SRV (not very well tested if they really work like they should)
+
+2006-01-12	Urs Weiss	<urs@tupa-dns.org>
+	- Integrated a configurable limit (which can be calculated. See config_default.php => maxTmplDomains) for the amount of domains which can be added in one time with a template to prevent a PHP script timeout (SF Bug-ID: 1356598)
+	- Fixed bug with MySQL 5 where a "NOT NULL" field is marked as Null=>"NO" in "SHOW COLUMNS" instead of beeing empty in MySQL 3,4 (SF Bug-ID: 1379071)
+	- Removed id column in default configured view (which only was used for developing)
+	- Added some stripslashes()-functions in multiple selectoption functions
+
+2006-01-11	Urs Weiss	<urs@tupa-dns.org>
+	- Finished migration functions for "PowerDNS Administration" and "PowerAdmin" in installer
+	- Fixed bug when using TUPA in an IPv6 network (SF Bug-ID: 1328240)
+
+2006-01-06	Urs Weiss	<urs@tupa-dns.org>
+	- Wrote PDNS import function for installer
+
+2006-01-04	Urs Weiss	<urs@tupa-dns.org>
+	- Change to set user preferences as (user-)admin
+
+2006-01-03	Urs Weiss	<urs@tupa-dns.org>
+	- Changed host REGEX to support wildcard records (SF Bug-ID: 1381380)
+	- Fixed a bug on table row creation
+	- Made change from 2005-11-17 a little bit nicer
+
+2005-12-23	Urs Weiss	<urs@tupa-dns.org>
+	- Finished manual backup restore function
+
+2005-12-20	Urs Weiss	<urs@tupa-dns.org>
+	- Added MySQL port number to installer and connection function
+
+2005-11-17	Urs Weiss	<urs@tupa-dns.org>
+	- Changed "Contact"-link in language file
+	- Added Firefox 1.5 to list of allowed/checked browsers
+
+2005-11-17	Urs Weiss	<urs@tupa-dns.org>
+	- Changed domain edit to show the edited domain instead of the default "domain.com" in the records
+
+2005-11-02	Urs Weiss	<urs@tupa-dns.org>
+	- Added "arpa" to the domain regex check (SF Bug-ID: 1342494)
+	- Added new PTR regex check
+
+2005-11-01	Urs Weiss	<urs@tupa-dns.org>
+	- Integrated base help functions
+
+2005-10-31	Urs Weiss	<urs@tupa-dns.org>
+	- Finished integration of multi-move-delete function
+
+2005-10-26	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug: After "Back to list" the last search is executed again, but search fields where blank.
+	- Fixed error when group with no users is selected in search
+	- Added field in log filters to search in the message field. For example to search for a specific domain name.
+	- crontab script (rrd_cron.php) should now also work on windows machines (NEVER TESTED!)
+	- Added file check to "Requirements" in installer
+
+2005-10-25	Urs Weiss	<urs@tupa-dns.org>
+	- Modified TUPA requirements in installer
+	- Finished base integration of system informations and PDNS statistics
+	- Added file "config_skin.inc.php" in template folder for template specifig RRD configuration. Overwrites values in config_default.php
+	- Added index.html files which redirects to main directory, and a .htaccess file which denies everyone to access the stats/db/ directory over the webserver
+	- Integrated Maintenance switch
+
+2005-10-24	Urs Weiss	<urs@tupa-dns.org>
+	- Changed date direction of Changelog.txt (newest on top)
+	- Modified JS messgeHandler function to work without message field on page
+
+#### TUPA 0.1-beta release ####
+
+2005-10-16	Urs Weiss	<urs@tupa-dns.org>
+	- Added greek translations (Thanks to Nikitas Skembris)
+	- Modified the generated Location on installer logout for windows servers
+	- Changed INSTALL.txt
+
+2005-10-12	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug in JsCalendar inclusion
+
+2005-10-10	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug on Group/User creating (missing value definition)
+	- Added missing "s" in limitExeeded function. Small typo, big effect...
+
+2005-10-09	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug when adding domains with template. Selectbox was not validated.
+	- Added missing class on group, user selectboxes
+	- Fixed bug with TXT spf records
+	- Extended Installer with safe_mode_exec_dir config check
+
+2005-10-07	Urs Weiss	<urs@tupa-dns.org>
+	- Merged part specific search buttons to a single translation
+	- Added german translations
+	- Moved browser detection on loginpage above the user authentication check
+
+2005-10-06	Urs Weiss	<urs@tupa-dns.org>
+	- Finished Log maintenance
+	- Fixed bug where the browser still tried to automatic refresh the logs but on false pages
+	- Moved login.html template aut of the skins directory into the root dir
+	- Integrated browser check on login page, wich shows a warning message when opening the site with a not known browser
+	- Added links in copyright message on login page
+	- Optimized code a bit. Removed not used globals or vars in functions, and so on
+	- INSTALL.txt updated
+
+2005-10-05	Urs Weiss	<urs@tupa-dns.org>
+	- Finished installer
+	- Added fullQuoteStrList-function for "IN (list)" SQL queries
+	- Fixed bug splitSpecialPartsFromFormdata()-function
+	- Added JavaScript confirmation on logout
+
+2005-10-01	Urs Weiss	<urs@tupa-dns.org>
+	- Changed email form validation to the lowest level (all higher levels from fValidate are to strict) (SF Bug-ID: 1314404)
+	- Fixed bug where the owner of edited record was alway set do own user
+	- Added automatic log refreshing select box
+
+2005-09-30	Urs Weiss	<urs@tupa-dns.org>
+	- Finished Tab-Layers
+	- Added possibility to edit record with a doubleclick in the list
+	- Fixed some other small bugs...
+
+2005-09-29	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed three typos in permission name when adding domain
+	- Fixed bug when adding domains with template as "normal" user
+	- Added cleaning of example div after adding domains with template
+	- Finished owner selections for admins
+
+2005-09-27	Urs Weiss	<urs@tupa-dns.org>
+	- User/Domain/Template - Limits finished
+
+2005-09-26	Urs Weiss	<urs@tupa-dns.org>
+	- Moved "config/config_default.php" to "lib/config_default.php" and added new "config/config_site.inc.php" which holds the changes from "lib/config_default.php"
+	- Moved "config/config-dist.inc.php" to "config/config_db-dist.inc.php". Now it's clear what it is
+	- INSTALL.txt updated
+
+2005-09-25	Urs Weiss	<urs@tupa-dns.org>
+	- Added group/user limit checks on show pages
+
+2005-09-20	Urs Weiss	<urs@tupa-dns.org>
+	- Changed email form validation to a less strict function (f.ex. something@what-ever.net was not possible because of the  "-")
+	- Fixed bug when adding domain(s) with template. The placeholder "%DOMAIN%" was not replaced.
+	- Added group selection box to search in users, templates and domains parts
+	- Created and added "move icon" (No function yet)
+
+2005-09-15	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed a typo in DB query class.tupa_domains.php => processDomain()
+	- Fixed bugs in delete functions
+	- replaced PHP isset() function with my own one where it made truble with some PHP 4.3 versions
+	- Moved "config/config.inc.php" to "config/config-dist.inc.php" and "config/config_default.php" to "config/config_default-dist.php" to prevent overwriting your configuration on update
+	- INSTALL.txt updated
+
+2005-09-14	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed false path in class.tempalte.php => makeLoginBoxImage()
+	- Replaced all hardcoded image sizes which comes from templates to dynamic ones from getimagesize()

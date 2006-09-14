@@ -1,0 +1,31 @@
+/* Main Styles */
+html, body { background-color:white; top:0px; left:0px; right:0px; margin:0px; padding:0px; width:100%; }
+SELECT, TEXTAREA, INPUT, TD, BODY, P, DIV { font-family: Arial, Helvetica, sans-serif; font-size: 10px; margin: 0px; color: black; }
+FORM { margin: 0 0 0 0; }
+
+/* Links in general */
+A { color : #003366; text-decoration: underline; }
+A:hover { text-decoration: underline; color: #254D7B }
+
+/* Images */
+IMG { border: 0px; }
+
+/* Form elements */
+.field, .button { font-size: 9px; padding: 0px 1px; border: 1px solid #666666; background-color: white; }
+
+/* Loginsite styles */
+BODY#index-php DIV#barpos { position: absolute; top: 30%;}
+BODY#index-php TABLE#bar { width: 100%; border-collapse: collapse; }
+BODY#index-php TD.loginbar { background-color: #C5CEF4; }
+BODY#index-php DIV#copyright { width: 70%; text-align: center; margin-top: 5px; }
+
+TABLE#bar DIV#browserwarning, TABLE#bar DIV#maintenance { background-color: #FFC35A; padding: 1px; text-align: center; margin-bottom: 5px; }
+TABLE#bar DIV#maintenance .exmark { color: red; text-decoration: blink; }
+ 
+TABLE#loginbox { margin: 5px; margin-left: 250px; }
+TABLE#loginbox TR TD { padding: 1px 1px 1px 1px;}
+TABLE#loginbox P { font-size: 12px; font-weight: bold; }
+TABLE#loginbox P.info { font-size: 10px; font-weight: normal; }
+TABLE#loginbox DIV#error { border: 1px solid #333; background-color: #FFC35A; padding: 2px; text-align: center; }
+TABLE#loginbox INPUT.username, TABLE#logintable INPUT.password { width: 150px; }
+TABLE#loginbox INPUT { border: #4d1300 solid 1px; background-color: white; }

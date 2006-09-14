@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+	<name>Ελληνικά</name>
+	<name_en>Greek</name_en>
+	<author>
+		<name>Nikitas Skembris</name>
+		<email>nske(AT)hackbox.gr</email>
+	</author>
+	<version_tstamp>0</version_tstamp>
+	<version_check>0.1-rc1</version_check>
+</language>

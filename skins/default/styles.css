@@ -1,0 +1,138 @@
+/* Layout styles */
+body { background-color:white; }
+#bg-left { position:fixed; width:150px; height:100%; background-image:url(images/bg-left.png); background-repeat:repeat-y; z-index:2; }
+#bg-top { position:fixed; width:100%; height:51px; background-image:url(images/bg-top.png); background-repeat:repeat-x; z-index:2; }
+#bg-logo { position:fixed; top:450px; z-index:3; }
+#logo { position:fixed; z-index:4; }
+#sysinfo { position:fixed; top: 0px; right: 10px; border:0px; z-index:7; }
+#menu { position:fixed; width:150px; top: 150px; border:0px; font-size:11px; z-index:10; }
+#content-container { position:absolute; top:0px; left:0px; right:0px; bottom:0px; width:100%; height:100%; }
+#content { position:absolute; width:600px; left: 175px; top: 150px; border:0px; font-size:11px; }
+
+/* Special layout styles for dumb browsers (IE) */
+* html, * html body { overflow:hidden; bottom:0px; height:100%; }
+* html #bg-left, * html #bg-top, * html #bg-logo, * html #logo, * html #menu, * html #sysinfo { position:absolute; }
+* html #bg-top { right: 16px; }
+* html #sysinfo { right: 20px; }
+* html #content-container { position:absolute; top:0px; left:0px; right:0px; bottom:0px; height:100%; width:100%; overflow-y:scroll; }
+* html #content { margin:0px; }
+
+/* Page loader */
+#pageloader-trans { position:absolute; background-image:url(images/pageloader_clear.png); }
+#pageloader-msg { position:absolute; visibility:hidden; padding:10px; border:2px solid #555555; background-image:url(images/pageloader_msg_bg.png); }
+
+/* Help */
+#helpLayer { position:absolute; z-index:99; display:none; }									/* NEW IN TUPA RC1 */
+#helpLayer TABLE { width:150px; border-collapse:collapse; border: 1px solid black; background-color: #e3e9f0; }	/* NEW IN TUPA RC1 */
+#helpLayer .header { background-color: #cdd6e2; }										/* NEW IN TUPA RC1 */
+
+/* Main styles */
+html, body { top:0px; left:0px; right:0px; margin:0px; padding:0px; width:100%; }
+SELECT, TEXTAREA, INPUT, TD, BODY, P, DIV { font-family: Arial, Helvetica, sans-serif; font-size: 10px; margin: 0px; color: black; }
+INPUT[disabled], SELECT[disabled] { background-color: #efefef }								/* NEW IN TUPA RC1 */
+FORM { margin: 0 0 0 0; }
+H1, H2, H3, H4 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold; margin: 3px 0px 3px 0px; }
+H1 { font-size: 12px; margin: 0px 0px 10px 0px; padding: 0px 2px; background-color: #dfe9f2; border: 1px solid #333333; }
+H2 { font-size: 11px; margin: 0px 0px 5px 0px; padding: 0px 2px; background-color: #d6dbe7; border-bottom: 1px solid #aaaaaa; }	/* NEW IN TUPA RC2 */
+H3 { font-size: 10px; margin: 0px 0px 5px 0px; padding: 0px 2px; background-color: #eceef2; border-bottom: 1px solid #aaaaaa; }	/* NEW IN TUPA RC2 */
+
+/* Links in general */
+A { color : #003366; text-decoration: none; }
+A:hover { text-decoration: underline; color: #254D7B }
+
+/* Images */
+IMG { border: 0px; }
+
+/* Form elements */
+.field, .button { font-size: 9px; padding: 0px 1px; border: 1px solid #666666; background-color: white; }
+.list-chkb { height: 1.3em; width: 1.3em; }									/* NEW IN TUPA RC1 */
+
+/* Logging colors */
+.log-info { color: #0A0; }
+.log-error { color: #C00; }
+.log-permission { color: #DFA33A; font-weight: bold; }
+.log-warning { color: #DFA33A; }										/* NEW IN TUPA RC1 */
+.log-security { color: #C00; font-weight: bold; }
+
+/* Sysinfo */
+DIV#sysinfo TD { padding: 0px; line-height: 12px; }								/* NEW IN TUPA RC1 */
+.sysinfoOverThreshold { color: #C00; font-weight: bold;}							/* NEW IN TUPA RC1 */
+.sysinfoOK { color: #0A0; }											/* NEW IN TUPA RC1 */
+.sysinfoError { color: #C00; font-weight: bold; text-decoration: blink; }					/* NEW IN TUPA RC1 */
+.sysinfoBox { border: 2px solid #97a5b5; border-top: none; }						/* NEW IN TUPA RC1 */
+.sysinfoBox HR.rrdcharts { width: 100%; height: 2px; border: 0px; color: #97a5b5; background-color: #97a5b5; }	/* NEW IN TUPA RC1 */
+.sysinfoBoxHeader { font-size: 12px; font-weight: bold; color: white; background-color: #97a5b5; }	/* NEW IN TUPA RC1 */
+.sysinfoBoxBody TABLE { padding: 3px; }									/* NEW IN TUPA RC1 */
+.sysinfoBoxBody TD { padding-right: 5px; }									/* NEW IN TUPA RC1 */
+
+/* Message field debug/error/sucess styles */
+INPUT.error-hilite, SELECT.error-hilite, TEXTAREA.error-hilite { font-size: 9px; border: 1px solid #666666; background-color: #FFC35A; }
+LABEL.error-hilite { color: #FFC35A; }
+UL#messages { display: none; margin-top: 1em; background-color: #FFE; border: 1px solid #CC9; padding: .3em; margin-left: 0px; color: #C00; font-weight: bold; }
+UL#messages li { margin-top: .5em; margin-bottom: .5em; margin-left: 20px; padding: 0px; cursor: pointer; }
+UL#messages li.error { margin-top: .5em; margin-bottom: .5em; margin-left: 20px; padding: 0px; cursor: default; }
+UL#messages li.success { color: #0A0; margin-top: .5em; margin-bottom: .5em; margin-left: 20px; padding: 0px; cursor: default; }
+UL#messages li.debug { color: #DFA33A; margin-top: .5em; margin-bottom: .5em; margin-left: 20px; padding: 0px; cursor: default; }
+UL#messages li.heading { list-style-type: none; color: #000; font-weight: normal; font-style: italic; margin: .5em 0px; padding: 0px; }
+
+/* Menu */
+P.menu1 { font-size: 12px; margin-bottom: 15px; margin-left: 10px; }
+
+/* Tab menu */
+#tab-menu { width: 100%; border-bottom: 1px solid black; margin-bottom: 10px; }
+#tab-menu .tab-ina { color:grey; border: 1px solid #555;  background: #cdd6e2; }
+#tab-menu .tab-over { color:#000; border: 1px solid #555;  background: #a9b9cf; }
+#tab-menu .tab-act { color: #000; border: 1px solid black; background: #f0e3ae; }
+#tab-menu .tab-ina, #tab-menu .tab-over, #tab-menu .tab-act { border-bottom: 0px; padding: 2px 0px; }
+#tab-menu TD { border-bottom: 0px; }
+#tab-menu A { color: black; text-decoration: none; padding: 2px 6px; }
+
+/* Show tables */
+DIV#search-form { width: 100%; background-color: #eeeeee; padding: 2px 0px; margin-bottom: 5px; }
+DIV#search-form INPUT { margin: 0px 3px 0px 2px; }
+
+DIV#filter-form { width: 100%; background-color: #eeeeee; padding: 2px 0px; margin-bottom: 5px; }
+
+DIV#char-list { width: 100%; text-align: center; background-color: #dddddd; margin-bottom: 5px; }
+DIV#char-list A { padding: 0px 3px; }
+DIV#char-list A:hover, .char-active { text-decoration: none; background-color: #ddaeaf; }
+
+DIV#site-navi { width: 100%; text-align: center; background-color: #cccccc; margin-bottom: 5px; }
+DIV#site-navi .navi-ina, DIV#site-navi .navi-cur, DIV#site-navi A { padding: 0px 3px; }
+DIV#site-navi .navi-cur, DIV#site-navi A:hover { text-decoration: none; background-color: #ddaeaf; }
+DIV#site-navi .navi-ina { color: #aaaaaa; }
+
+/* Show items columns (general) */
+.groups-cell-id, .users-cell-id, .templates-cell-id, .domains-cell-id { width: 20px; }
+.groups-cell-name,  .templates-cell-name,  .domains-cell-name {  }
+.groups-cell-edit, .users-cell-edit, .templates-cell-edit, .domains-cell-edit { width: 15px; }
+.groups-cell-move, .users-cell-move, .templates-cell-move, .domains-cell-move { width: 15px; }
+.groups-cell-delete, .users-cell-delete, .templates-cell-delete, .domains-cell-delete { width: 15px; }
+.groups-cell-chkb, .users-cell-chkb, .templates-cell-chkb, .domains-cell-chkb { width: 15px; }		/* NEW IN TUPA RC1 */
+.default-icon-width { width: 15px; }										/* NEW IN TUPA RC1 */
+
+/* Show items columns (users) */
+.users-cell-username { width: 100px; }
+.users-cell-name { width: 100px; }
+.users-cell-firstname {  }
+
+/* Show items rows */
+.table-show { width: 100%; border-collapse: collapse; border: none;}
+.table-header { background-color: #97a5b5; font-weight: bold; border-bottom: 1px solid black; }
+.table-header TD { padding: 2px 4px 2px 4px ! important ;}
+.table-row1 TD, .table-row2 TD, .table-row-ro TD { padding: 2px 4px 2px 4px ! important; }
+.table-row1 { background-color: #cfd9e2; }
+.table-row2 { background-color: #b7c5d5; }
+.table-row-ro { background-color: #ddaeaf; cursor: pointer; }
+
+/* Forms */
+TABLE.form-table TD { padding: 4px 4px 0px 4px; vertical-align: top; }
+TABLE#records-table TD { padding: 4px 2px 0px 1px; }
+.form-subtitle { font-weight: bold; border-bottom: 1px solid #666666; white-space:nowrap; }
+.form-subtitle-right { font-weight: bold; border-bottom: 1px solid #666666; border-left: 1px solid #666666; white-space:nowrap; }
+.form-text-style {}
+.form-text-style-right { border-left: 1px solid #666666; }
+
+/* Box */
+DIV .box-border { background-color: #FFE; border: 1px solid #999999; margin-bottom: 10px; padding: 0px; }
+DIV .box-border P { margin: 3px; }
