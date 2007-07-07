@@ -39,6 +39,9 @@ if ($_SERVER['REMOTE_ADDR']) {
 	die('It\'s not allowed to call this script from a remote host!');
 }
 
+// Change to script directory
+chdir(dirname(__FILE__));
+
 require('../init.php');
 
 

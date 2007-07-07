@@ -44,21 +44,21 @@ $TUPA_CONF_VARS = array(
 	'SYS' => array(			// System related settings.
 		'sitename' => 'The Ultimate PowerDNS Admin',			// Name of the base-site.
 		'maintenanceEnabled' => 0,					// BOOLEAN |*| |*| If maintenance is enabled, only user "admin" can login into TUPA.
+		'debugMode' => '',							// BOOLEAN |*| |*| Enabled debug mode enables PHP errors (down to notices) to be shown and prints parse-time in message field.
 		'loginHashTimeout' => 300,					// NUMBER |*| number|0|30|3600 |*| Time in seconds the temp-hash is valid after loading the login page. The hash is used to crypt the password.
 		'sessionTTL' => 1800,					// NUMBER |*| number|0|300|86400 |*| Time in seconds the session is valid. This also sets the php value (session.gc_maxlifetime) to this value to ensure it is not smaller than this value.
-		'sessionTimeoutWarning' => 30,				// NUMBER |*| number|0|0|1800 |*| Time in seconds before the session times out to open a warning message (set it to 0 to disable).
+		'sessionTimeoutWarning' => 60,				// NUMBER |*| number|0|0|1800 |*| Time in seconds before the session times out to open a warning message (set it to 0 to disable).
 		'noPconnect' => '',						// BOOLEAN |*| |*| If set, a non-persistent connection is made to database. Non-persistent connections are slower (normally)!
 		'languages' => 'en|de_ch|el',						// List of avaiable languages. Splitted by | (not comma!) Only include the languages you really need! (This wil change in future versions). The file in /lang must have the same name (ex. en.inc.php / de_ch.inc.php).
 		'language' => 'en',							// Language of the user itself. This value can be changed from the user over the preferences page. It's not identical with langDefault because this one changes!
 		'langDefault' => 'en',						// SELECTOR |*| select |*| This language is preselected when creating a new user.
 		'langFallback' => 'en',							// DON'T CAHNGE!!! Language to fall back if a word does not exists in configured language (should always be 'en' because this is the language which is always up to date).
-		'langMgrServerUrl' => 'http://www.tupa-dns.org/47.733.html',	// URL to get actual list of languages from
+		'langMgrServerUrl' => 'http://www.tupa-dns.org/47.733.html',	// DON'T CAHNGE!!! URL to get actual list of languages from
 		'styleField' => 'field',							// Used for input fields in forms. Is defined as constant (STYLE_FIELD) in init.php
 		'styleButton' => 'button',						// Used for buttons in forms. Is defined as constant (STYLE_BUTTON) in init.php
 		'authKeyMaintenance' => 5,					// NUMBER |*| number|0|1|100 |*| Authentication key meintenance. Value between 1 and 100 (%). This is the possibility in % the maintenance runs on page load. Values over 10 makes no sense.
 		'logMaintenanceDays' => 0,					// NUMBER |*| number|0|0|3660 |*| Number of days to keep in log table. Set it to 0 to disable. The maintenance function takes the value witch matchs FIRST (logMaintenanceDays or logMaintenanceRecords). (Older logs are deleted permanetly!)
-		'logMaintenanceRecords' => 0,				// NUMBER |*| number|0|0|1000000 |*| Number of records to keep in log table. Set it to 0 to disable, The maintenance function takes the value witch matchs FIRST (logMaintenanceDays or logMaintenanceRecords). (Older logs are deleted permanetly!)
-		'debugMode' => false,						// Debug mode: false => disabled / true => prints parse time
+		'logMaintenanceRecords' => 0,				// NUMBER |*| number|0|0|1000000 |*| Number of records to keep in log table. Set it to 0 to disable, The maintenance function takes the value witch matchs FIRST (logMaintenanceDays or logMaintenanceRecords). (Older logs are deleted permanetly!) 
 		'notificationEmail' => 'notification@example.com',		// STRING |*| email|1 |*| Senders eMail address where notifications come from. (not used yet)
 		'notificationName' => 'TUPA DNS Notification',		// STRING |*| blank |*| Senders Name where notifications come from. (not used yet)
 		'optimizeJsCode' => 1,					// BOOLEAN |*| |*| if set to true the javascript code is optimized by removing unneeded stuff like comments, tabulators and line breakes. (You should only disable it for development)
@@ -67,7 +67,14 @@ $TUPA_CONF_VARS = array(
 		'defaultTTL' => 86400,					// NUMBER |*| number|0|3600|604800 |*| The default TTL for new DNS records.
 		'defaultPrio'	=> 20,						// NUMBER |*| number|0|1|65535 |*| The default priority for new DNS records.
 		'defaultSoaPrimary' => 'your.primary-ns-name.com',	// STRING |*| custom||^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.[a-zA-Z]{2,6} |*| The default primary nameserver for new SOA records.
+		'soaPrimary' => '',							// Primary nameserver for new SOA records (Set by group and/or user preferences).
+		'allowSoaPrimaryChange' => 1,				// BOOLEAN |*| |*| Set this value to if you and your users should be able to edit the primary nameserver in the SOA records.
 		'defaultSoaHostmaster' => 'hostmaster@email.com',	// STRING |*| email|1 |*| The default hostmaster eMail for new SOA records.
+		'soaHostmaster' => '',						// Hostmaster eMail for new SOA records (Set by group and/or user preferences).
+		'allowSoaHostmasterChange' => '',			// BOOLEAN |*| |*| Set this value to if you and your users should be able to edit the SOA hostmaster eMail address
+		'allowDomainNameChange' => 1,				// BOOLEAN |*| |*| Set this value to if you and your users should be able to edit the domain name when editing a domain
+		'enableFancyRecords' => '',						// BOOLEAN |*| |*| Set this value to if you use fancy records. ( http://downloads.powerdns.com/documentation/html/fancy-records.html )
+		'additionalTLDs' => '',						// STRING |*| custom|bok||^[a-zA-Z0-9]+(\|[a-zA-Z0-9]+)*$ |*| If you have additional TLD's for internal use add a "|"-separated list (f.ex first|second|third )
 		'defaultSoaRefresh' => 10800,				// NUMBER |*| number|0|3600|86400 |*| The default refresh time for new SOA records.
 		'minSoaRefresh' => 3600,						// Minimum allowed refresh time
 		'maxSoaRefresh' => 86400,						// Maximum allowed refresh time
@@ -80,8 +87,7 @@ $TUPA_CONF_VARS = array(
 		'defaultSoaTTL' => 86400,					// NUMBER |*| number|0|3600|604800 |*| The default TTL time for new SOA records.
 		'minSoaTTL' => 3600,						// Minimum allowed TTL time
 		'maxSoaTTL' => 604800,						// Maximum allowed TTL time
-		'defaultDomainType' => 'NATIVE',				// STRING |*| blank |*| The default type for PowerDNS Domains. (Only "NATIVE" works without additional code changes)
-		'enableFancyRecords' => '',					// BOOLEAN |*| |*| Set this value to if you use fancy records. ( http://downloads.powerdns.com/documentation/html/fancy-records.html )
+		'defaultDomainType' => 'NATIVE',				// STRING |*| blank |*| The default type for PowerDNS Domains. (Only "NATIVE" is officially supported by TUPA)
 	),
 	'SKINS' => array(			// Skins related settings.
 		'skins' => 'default',							// List of avaiable skins splitted by "|". Names MUST be identical with directory name.
@@ -134,23 +140,6 @@ $TUPA_CONF_VARS = array(
 	'CRON' => array(		// Cronjob related settings.
 		'insertRrdDemoData' => '',					// BOOLEAN |*| |*| If set, TUPA generates random RRD values itself. Only needed for demo installation.
 		'pdnsConfigName' => ''					// STRING |*| |*| Set the config name if you need one (if you have f.ex. an init script called "pdns-something" and a config file called "pdns-something.conf" you have to set this to "something"). Leave it blank if you don't know what im talking about.
-	),
-	'REGEX' => array(	// Some used regular expressions. DON'T CHANGE!!
-		'templateDomain' =>'^%DOMAIN%$|(^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.(%DOMAIN%|'. $topLevelDomains .'))$',
-		'domain' =>'(^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .')$)',
-		//'textareaMultiDomains' =>'^([a-zA-Z0-9][a-zA-Z0-9\-\.]+\.('. $topLevelDomains .')(\n)?)*$',
-		'textareaMultiDomains' =>'^([a-zA-Z0-9][a-zA-Z0-9\-\.]+\.('. $topLevelDomains .')(\n)?){1,%maxTmplDomains%}$',
-		'host' => '^[a-zA-Z0-9\*]([a-zA-Z0-9\-\.]*)$',
-		'IPv4' => '^\d{1,3}(\.\d{1,3}){3}$',
-		'IPv6' => '^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$',
-		'PTR' => '^([0-9]{0,3}((\.)?([0-9]{1,3})){0,3})$|^((([0-9A-Fa-f]\.){31}|([0-9A-Fa-f]\.){27}|([0-9A-Fa-f]\.){23}|([0-9A-Fa-f]\.){19}|([0-9A-Fa-f]\.){15}|([0-9A-Fa-f]\.){11}|([0-9A-Fa-f]\.){7}|([0-9A-Fa-f]\.){3})[0-9A-Fa-f])$',
-		'HINFO' => '^([A-Za-z0-9\-\/])+ ([A-Za-z0-9\-\/])+$',
-		'RP' => '^(([A-Za-z0-9\._-]+[@][A-Za-z0-9\._-]+\.('. $topLevelDomains .'))|\.) (([a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .'))|\.)$',
-		'SRV_CONTENT' => '^[0-9]{0,5} [0-9]{0,5} (([a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .'))|\.)$',
-		'SRV_NAME' => '^_[A-Za-z]+\._[A-Za-z]+$',
-		//'numeric' => '^\\d+$',
-		'time24' => '^(((0?[0-9])|(1[0-9])|(2[0-4]))\:([0-5][0-9]))$',
-		'url' => '^(http|https)\:\/\/[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .')$',
 	),
 	'RRD' => array(	// RRD graphics generation (Should only be changed in template config)
 		'CONFIG' => array(
@@ -240,7 +229,7 @@ $TUPA_CONF_VARS = array(
 		'copyrightNotice' => '/***************************************************************
 *  Copyright notice
 *
-*  (c) 2005 Urs Weiss (urs@tupa-dns.org)
+*  (c) 2005-2007 Urs Weiss (urs@tupa-dns.org)
 *  All rights reserved
 *
 *  This file is part of TUPA.
@@ -282,14 +271,13 @@ $TUPA_CONF_VARS = array(
 </html>'
 	),
 );
-unset($topLevelDomains);
 
-	// TUPA version
+// TUPA version
 $TUPA_VERSION = '0.1-rc1';
 define('TUPA_version', $TUPA_VERSION);
 define('TUPA_branch', '0.1rc1');
 
-	// Database-variables are cleared!
+// Database-variables are cleared!
 $tupa_db = '';					// The database name
 $tupa_db_username = '';			// The database username
 $tupa_db_password = '';			// The database password
@@ -297,14 +285,39 @@ $tupa_db_host = '';				// The database host
 $tupa_db_port = '';				// The database port
 $installer_password = '';			// Installer password
 
-	// overrite with users site configuration
+// overrite with users site configuration
 if (@is_file(PATH_config.'config_site.inc.php')) {
 	require(PATH_config.'config_site.inc.php');
 } else {
-	die('"'. PATH_config .'config_site.inc.php" was not found!<br />You have to copy the file"config/config_site-dist.inc.php" to "config/config_site.inc.php" when you install TUPA the first time. Start the installer over your browser after you did that (installer/ subdirectory).');
+	die('"'. PATH_config .'config_site.inc.php" was not found!<br />You have to copy the file"config/config_site-dist.inc.php" to "config/config_site.inc.php" and change to permission of the file to make it writable by the webserver user when you install TUPA the first time. Start the installer over your browser after you did that (installer/ subdirectory).');
 }
 
-	// Defining the database setup as constants
+// Set $TUPA_CONF_VARS['REGEX']
+// Because there is a new config option to add additional TLD's we have to create them after inclusion of site config
+if ($TUPA_CONF_VARS['DNS']['additionalTLDs'] != '') {
+	$topLevelDomains .= '|'. $TUPA_CONF_VARS['DNS']['additionalTLDs'];
+}
+$TUPA_CONF_VARS['REGEX'] = array(	// Some used regular expressions. DON'T CHANGE!!
+	'templateDomain' =>'^%DOMAIN%$|(^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.(%DOMAIN%|'. $topLevelDomains .'))$',
+	'domain' =>'(^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .')$)',
+	//'textareaMultiDomains' =>'^([a-zA-Z0-9][a-zA-Z0-9\-\.]+\.('. $topLevelDomains .')(\n)?)*$',
+	'textareaMultiDomains' =>'^([a-zA-Z0-9][a-zA-Z0-9\-\.]+\.('. $topLevelDomains .')(\n|\r\n)?){1,%maxTmplDomains%}$',
+	'host' => '^[a-zA-Z0-9\*]([a-zA-Z0-9\-\.]*)$',
+	'IPv4' => '^(25[0-5]|2[0-4]|1\d\d|\d?\d)(\.(25[0-5]|2[0-4]|1\d\d|\d?\d)){3}$',
+	'IPv6' => '^((([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){6}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(([0-9A-Fa-f]{1,4}:){0,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))|([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})|(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})|(([0-9A-Fa-f]{1,4}:){1,7}:))$',
+	'PTR' => '^([0-9]{0,3}((\.)?([0-9]{1,3})){0,3})$|^((([0-9A-Fa-f]\.){31}|([0-9A-Fa-f]\.){27}|([0-9A-Fa-f]\.){23}|([0-9A-Fa-f]\.){19}|([0-9A-Fa-f]\.){15}|([0-9A-Fa-f]\.){11}|([0-9A-Fa-f]\.){7}|([0-9A-Fa-f]\.){3})[0-9A-Fa-f])$',
+	'HINFO' => '^([A-Za-z0-9\-\/])+ ([A-Za-z0-9\-\/])+$',
+	'RP' => '^(([A-Za-z0-9\._-]+[@][A-Za-z0-9\._-]+\.('. $topLevelDomains .'))|\.) (([a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .'))|\.)$',
+	'SRV_CONTENT' => '^[0-9]{0,5} [0-9]{0,5} (([a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .'))|\.)$',
+	'SRV_NAME' => '^_[A-Za-z-]+\._[A-Za-z-]+$',
+	'LOC' => '^(90|[0-8]\d|\d)(\s([0-5]\d|\d)){0,2}\s[NS]\s(180|1[0-7]\d|\d?\d)(\s([0-5]\d|\d)){0,2}\s[EW]$',
+	//'numeric' => '^\\d+$',
+	'time24' => '^(((0?[0-9])|(1[0-9])|(2[0-4]))\:([0-5][0-9]))$',
+	'url' => '^(http|https)\:\/\/[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.('. $topLevelDomains .')$',
+);
+unset($topLevelDomains);
+
+// Defining the database setup as constants
 define('TUPA_db', $tupa_db);
 define('TUPA_db_username', $tupa_db_username);
 define('TUPA_db_password', $tupa_db_password);
@@ -315,7 +328,7 @@ define('TUPA_db_port', $tupa_db_port);
 define('TUPA_installer_password', $installer_password);
 
 
-	// Unsetting the configured values. Use of these are depreciated.
+// Unsetting the configured values. Use of these are depreciated.
 unset($tupa_db);
 unset($tupa_db_username);
 unset($tupa_db_password);

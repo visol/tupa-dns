@@ -13,6 +13,8 @@
   * They will be configurable over an interface in a later release.
   */
 
+## INSTALLER EDIT POINT TOKEN - all lines after this points may be changed by the installer!
+
 // md5 encoded installer password
 $installer_password = 'db82d9865acccd8d8ccf583b0ecf99e9';
 

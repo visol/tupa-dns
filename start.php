@@ -56,7 +56,7 @@ $icons['logotop']['path']	= lib_div::getSkinFilePath(PATH_images .'logo-top.png'
 $icons['logotop']['size']	= @getimagesize(PATH_site . $icons['logotop']['path']);
 
 // Get the template
-$templateFileContent = $TBE_TEMPLATE->fileContent(PATH_templates .'start.html');
+$templateFileContent = $TBE_TEMPLATE->fileContent(lib_div::getSkinFilePath(PATH_templates_fallback .'start.html'));
 // Get template subpart
 $subpart = $TBE_TEMPLATE->getSubpart($templateFileContent, '###TUPA_START###');
 

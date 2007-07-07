@@ -283,7 +283,7 @@ class installer extends  lib_config {
 	 * @return 	void
 	 */
 	function checkExtensions() {
-		$head = 'Extensions';
+		$head = 'PHP Extensions (Modules)';
 		if (extension_loaded('mysql')) {
 			$this->message($head, 'MySQL extension loaded', '', -1);
 		} else {
@@ -420,7 +420,7 @@ class installer extends  lib_config {
 			"skins/" => array('Contains the skins directories. Has not to be writable at the moment.', 1),
 			"lang/" => array('Contains the language directories. Has not to be writable at the moment.', 1),
 			"stats/" => array('Contains PDNS statistic RRD charts. Has to be writable for webserver because it generates the chart into it.', 2),
-			"stats/db/" => array('Contains PDNS statistic round robin database (RRD). Has to be writable for the user you use to run crontab and access the PDNS data.', 1),
+			"stats/db/" => array('Contains PDNS statistic round robin database (RRD). Has to be writable for the user you use to run crontab and access the PDNS data. This normally is NOT the apache user. So you may can ignore this warning.', 1),
 		);
 
 		reset($checkWrite);
@@ -482,7 +482,7 @@ class installer extends  lib_config {
 	 * @return 	void
 	 */
 	function checkFiles() {
-		$head = 'Files';
+		$head = 'Files / Programs';
 
 		if (PHP_OS == 'WINNT') {
 			$this->message($head, "", "", 2);
@@ -499,6 +499,7 @@ class installer extends  lib_config {
 			"config/config_site.inc.php" => array('The configuration file has to be writeable by apache user.', 1),
 			"pdns_control" => array('"pdns_control" not found in $PATH ('. $_ENV['PATH'] .').', 0),
 			"rrdtool" => array('"rrdtool" not found in PATH ('. $_ENV['PATH'] .').', 0),
+			"php" => array('"php" executable not found in PATH ('. $_ENV['PATH'] .').<br />It is needed for cronjobs (Backup / PDNS stats)', 0),
 		);
 
 		reset($checkFile);

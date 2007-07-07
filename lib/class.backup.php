@@ -42,15 +42,26 @@ class backup {
 	var $filePrefix = 'tupa_mysqldump_';
 	var $contentEncoding = '';
 	var $mimeType = '';
+	var $email = '';
 	var $compression = '';
-	var $dumpOptions = array();
-	var $time = array();
+	var $dumpOptions = array(
+		'dbcreate' => '',
+		'complete' => '',
+		'extended' => ''
+	);
+	var $time = array(
+		'frequency' => '',
+		'weekday' => '',
+		'day' => '',
+		'btime' => ''
+	);
 	var $pathLocal = '';
 	var $pathRemote = '';
 	var $save = '';
 	var $protocol = '';
 	var $passive = '';
 	var $sshFingerprint = '';
+	var $rawSshFingerprint = '';
 	var $host = '';
 	var $port = '';
 	var $username = '';
@@ -58,7 +69,18 @@ class backup {
 	var $transferMode = '';
 	var $connId = '';
 	var $sftpId = '';
-	var $maintenance = array();
+	var $maintenance = array(
+		'local' => array (
+			'amount' => '',
+			'days' => '',
+			'size' => ''
+		),
+		'remote' => array (
+			'amount' => '',
+			'days' => '',
+			'size' => ''
+		)
+	);
 	var $returnMessage = 1;		// 1=>echo (in popup) 2=>addMessage (in PHP)  3=>addMessage (in JS for $UPLOAD only!)
 	
 	
@@ -71,14 +93,14 @@ class backup {
 		// Check $_SERVER['_'] value again in class to set cronExec var to prevent the database can be downloaded later in script when no user verification could be made.
 //		if (!$_SERVER['REMOTE_ADDR'] && $_SERVER['_']) $this->cronExec = true;
 //	echo $this->cronExec;
-		if ($_GET['dump'] == 1 && !$this->cronExec) {
+		if (array_key_exists('dump', $_GET) && $_GET['dump'] == 1 && !$this->cronExec) {
 			$this->compression = intval($_GET['compression']);
 			$this->dumpAndSend();
-		} elseif (($_GET['dump'] == 2 && $_GET['useConfig'] == 1) || $this->cronExec) {
+		} elseif ((array_key_exists('dump', $_GET) && $_GET['dump'] == 2 && $_GET['useConfig'] == 1) || $this->cronExec) {
 			$this->dumpAndStore();
 		} elseif (!$this->cronExec) {
 			$dumpNr = 1;
-			if ($_GET['useConfig'] == 1) $dumpNr = 2;
+			if (array_key_exists('useConfig', $_GET) && $_GET['useConfig'] == 1) $dumpNr = 2;
 			// Open a window with message and redirect to dump
 			$this->openRedirectDump($dumpNr);
 		}

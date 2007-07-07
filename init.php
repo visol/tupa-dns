@@ -74,11 +74,11 @@ function debug($var='',$brOrHeader=0) {
 if (@is_file(PATH_lib .'config_default.php')) {
 	require(PATH_lib .'config_default.php');
 } else {
-	die ('The default configuration file was not included.');
+	die ('The default configuration file "lib/config_default.php" was not included.');
 }
-if (@is_file(PATH_config .'config_site.inc.php')) {
-	require(PATH_config .'config_site.inc.php');
-}
+#if (@is_file(PATH_config .'config_site.inc.php')) {
+#	require(PATH_config .'config_site.inc.php');
+#}
 
 // **************************************
 // Set error reporting for debugging

@@ -471,7 +471,7 @@ class tupa_general {
 					$preDelete = 'delete'. lib_div::firstUpper($conf['csite'], true) .'(\''. $row['id'].'\');';
 					if ($conf['csite'] == 'templates' OR $conf['csite'] == 'domains') {
 						$msgTrans = $LANG->getLang('delete'. lib_div::firstUpper($conf['csite'], true) .'JsConfirm', array('name' => $row['name']));
-						$preDelete = "openConfirm('". lib_div::convertMsgForJS($msgTrans) ."', '". lib_div::slashJS($preDelete) ."')";
+						$preDelete = "openConfirm('". lib_div::convertMsgForJS($msgTrans) ."', '". lib_div::slashJS($preDelete) ."', 'void(0);')";
 					}
 					$deleteContent = '<a href="javascript:void(0);" onclick="'. $preDelete .'"><img src="'. $icons['del']['path'] .'" '. $icons['edit']['size'][3] .' border="0" /></a>';
 					$multiChkBox = 2;
@@ -491,7 +491,7 @@ class tupa_general {
 				// Add checkbok for multi move / delete
 				$multiChkBoxContent = '';
 				if ($multiChkBox == 2) {
-					$multiChkBoxContent = '<input type="checkbox" onchange="multiMvDelChkbUpdate(this, '. $multiMove .', '. $multiDel .');" name="mmvdel" value="'. $row['id'] .'" '. (lib_div::isset_value($conf, 'data=>id') && lib_div::inList($row['id'], $conf['data']['id']) ? 'checked' : '') .' class="list-chkb" />';
+					$multiChkBoxContent = '<input type="checkbox" onclick="multiMvDelChkbUpdate(this, '. $multiMove .', '. $multiDel .');" name="mmvdel" value="'. $row['id'] .'" '. (lib_div::isset_value($conf, 'data=>id') && lib_div::inList($row['id'], $conf['data']['id']) ? 'checked' : '') .' class="list-chkb" />';
 				} elseif($multiChkBox == 1) {
 					$multiChkBoxContent = '&nbsp;';
 				} else {
@@ -524,7 +524,8 @@ class tupa_general {
 			$preDelete = 'delete'. lib_div::firstUpper($conf['csite'], true) .'();';
 			if ($conf['csite'] == 'templates' OR $conf['csite'] == 'domains') {
 				$msgTrans = $LANG->getLang('delete'. lib_div::firstUpper($conf['csite']) .'JsConfirm');
-				$preDelete = "openConfirm('". lib_div::convertMsgForJS($msgTrans) ."', '". lib_div::slashJS($preDelete) ."')";
+				//$preDelete = "openConfirm('". lib_div::convertMsgForJS($msgTrans) ."', '". lib_div::slashJS($preDelete) ."', 'void(0);')";
+				$preDelete = "multiMvDelExecDel('". lib_div::convertMsgForJS($msgTrans) ."', '". lib_div::slashJS($preDelete) ."')";
 			}
 			$markerArray['header_class'] = $conf['csite'] .'-cell-delete';
 			$markerArray['header'] = '&nbsp;';

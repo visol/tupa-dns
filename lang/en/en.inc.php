@@ -408,7 +408,7 @@ $this->LANG['en'] = array(
 	'backupUpdateConfigSuccess'		=>	'Configuration saved successfully.',						// 2
 	'backupDumpErrorTitle'			=>	'mysqldump error',								// 2
 	'backupUnknownOptionError'		=>	'Unknown option in mysqldump command!',					// 2
-	'backupFalseUsrPwdError'			=>	'False user or password while connectiong to database!',			// 2
+	'backupFalseUsrPwdError'			=>	'False user or password while connecting to database!',			// 2
 	'backupMysqldumpNotFoundError'		=>	'mysqldump command not found!',						// 2
 	'backupStartDbDump1'			=>	'Starting dump of database "%DB%".<br /><br />(You can close this window AFTER downloading the dump file)',				// 2
 	'backupStartDbDump2'			=>	'Starting dump of database "%DB%".',															// 2
@@ -456,8 +456,11 @@ $this->LANG['en'] = array(
 	'backupCalcNextExecError'			=>	'Calculation of next backup execution failed. Backup was not executed.',										// 2
 
 // System Information
-	'sysPdnsRunning'				=>	'Running',			// 2
-	'sysPdnsStopped'				=>	'!!! STOPPED !!!',		// 2
+	'sysPdnsRunning'				=>	'Running',								// 2
+	'sysPdnsStopped'				=>	'!!! STOPPED !!!',						// 2
+	'sysInfoNetInfoUnavailable'		=>	'No network information available',		// 3
+	'sysInfoMemInfoUnavailable'		=>	'No memory information available',		// 3
+	'sysInfoFsInfoUnavailable'		=>	'No filesystem information available',	// 3
 
 // RRD Stuff (Titles / Lables / ...)
 // ATTENTION!!

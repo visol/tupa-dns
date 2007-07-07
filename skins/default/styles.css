@@ -76,7 +76,8 @@ UL#messages li.debug { color: #DFA33A; margin-top: .5em; margin-bottom: .5em; ma
 UL#messages li.heading { list-style-type: none; color: #000; font-weight: normal; font-style: italic; margin: .5em 0px; padding: 0px; }
 
 /* Menu */
-P.menu1 { font-size: 12px; margin-bottom: 15px; margin-left: 10px; }
+P.menu1 { font-size: 12px; margin-bottom: 11px; margin-left: 10px; margin-right: 5px; }
+P.menu1 A { display: block; }
 
 /* Tab menu */
 #tab-menu { width: 100%; border-bottom: 1px solid black; margin-bottom: 10px; }

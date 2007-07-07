@@ -146,7 +146,7 @@ function addRow(tableid, loc, addFirst, valueArr, updateRF) {
 	attr['name'] = 'prio_' + counter;
 	attr['size'] = '3';
 	if (valueArr) attr['value'] = valueArr['prio'];
-	if (!valueArr || valueArr['type'] != 'MX') attr['disabled'] = true;
+	if (!valueArr || (valueArr['type'] != 'MX' && valueArr['type'] != 'SRV')) attr['disabled'] = true;
 	attr['class'] = 'field';
 	attr['className'] = 'field';
 	addTableCell('input');
@@ -370,7 +370,8 @@ function addTableCell(type) {
 		case 'SELECT':
 			ffield = document.createElement('SELECT');
 			for (i=0;i < attr['options'].length;i++) {
-				ffield.options.add(attr['options'][i], i);
+//				ffield.options.add(attr['options'][i], i);
+				ffield.options[ffield.length] = attr['options'][i];
 			}
 			ffield.selectedIndex = attr['isSel'];
 			delete (attr['options']);

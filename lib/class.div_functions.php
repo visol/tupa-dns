@@ -597,7 +597,8 @@ class lib_div {
 
 
 	function &makeInstance($className)	{
-		return class_exists('ux_'.$className) ? lib_div::makeInstance('ux_'.$className) : new $className;
+		$newInstance = class_exists('ux_'.$className) ? lib_div::makeInstance('ux_'.$className) : new $className; 
+		return $newInstance;
 	}
 
 
@@ -760,7 +761,9 @@ class lib_div {
 				}
 
 				// Add id
-				$dataArr[$keyArr['1']]['id'] = $fData['hidden']['id_'. $keyArr['1']];
+				if (array_key_exists('id_'. $keyArr['1'], $fData['hidden'])) { 
+					$dataArr[$keyArr['1']]['id'] = $fData['hidden']['id_'. $keyArr['1']];
+				}
 
 				// Add the sorting
 				$dataArr[$keyArr['1']]['tupasorting'] = $fData['hidden']['tupasorting_'. $keyArr['1']];
@@ -1032,8 +1035,11 @@ class lib_div {
 					case 'PREFS_naviShowPages':
 						if (!is_numeric($value) || !($value >= $TUPA_CONF_VARS['PREFS']['minNaviShowPages'] && $value <= $TUPA_CONF_VARS['PREFS']['maxNaviShowPages'])) $error = $LANG->getLang('naviShowPagesError', array('min'=>$TUPA_CONF_VARS['PREFS']['minNaviShowPages'], 'max'=>$TUPA_CONF_VARS['PREFS']['maxNaviShowPages']));
 						break;
-					case 'DNS_defaultSoaPrimary':
-						if ($value == '' || !preg_match($regexDomain, $value)) $error = $LANG->getLang('soaPrimaryError');
+					case 'DNS_soaPrimary':
+						if ($value != '' && !preg_match($regexDomain, $value)) $error = $LANG->getLang('soaPrimaryError');
+						break;
+					case 'DNS_soaHostmaster':
+						if ($value != '' && !lib_div::validEmail($value)) $error = $LANG->getLang('soaPrimaryError');
 						break;
 				}
 				$keyArr = explode('_', $key);
@@ -1052,6 +1058,9 @@ class lib_div {
 					$permArr = lib_div::array_merge_recursive_overrule($permArr, $tmpPermArr, '0');
 				}
 			} else {
+				// Skip if it is a temp value
+				if (substr($key, '0', '4') == 'temp') continue;
+				 
 				$groupId = $GLOBALS['TUPA_DB']->exec_SELECTgetGroupIdOfUser($id);
 				switch($key) {
 					case 'grp_id':

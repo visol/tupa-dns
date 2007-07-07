@@ -103,8 +103,18 @@ class tupa_groups {
 
 		$markerArray['label_groupname'] = $LANG->getLang('labelGroupname');
 		$markerArray['input_groupname'] = '<input type="text" name="name" class="'. STYLE_FIELD .'" size="30" alt="blank" emsg="'. $LANG->getLang('groupnameError') .'" '. (lib_div::isset_value($row, 'name') ? 'value="'. $row['name'] .'"' : '') .' />'. $LANG->getHelp('helpGroupsName');
-		$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
-		$markerArray['input_soa_primary'] = '<input type="text" name="pref_DNS_defaultSoaPrimary" class="'. STYLE_FIELD .'" size="30" alt="blank" emsg="'. $LANG->getLang('soaPrimaryError') .'" value="'. (lib_div::isset_value($prefArr, 'DNS=>defaultSoaPrimary') ? $prefArr['DNS']['defaultSoaPrimary'] : $TUPA_CONF_VARS['DNS']['defaultSoaPrimary']) .'" />'. $LANG->getHelp('helpSoaPrimaryG');
+		if ($TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] == true) {
+			$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
+			$markerArray['input_soa_primary'] = '<input type="checkbox" name="temp_soa_primary_chk" value="1" onchange="toggleFields(this, \'pref_DNS_soaPrimary|1|\', \'pref_DNS_soaPrimary|0|\', \'group_config\');" '. (lib_div::isset_value($prefArr, 'DNS=>soaPrimary') ? 'checked' : '') .' />&nbsp;<input type="text" name="pref_DNS_soaPrimary" class="'. STYLE_FIELD .'" size="30" alt="custom|bok" pattern="'. $TUPA_CONF_VARS['REGEX']['domain'] .'" emsg="'. $LANG->getLang('soaPrimaryError') .'" '. (lib_div::isset_value($prefArr, 'DNS=>soaPrimary') ? 'value="'. $prefArr['DNS']['soaPrimary'] .'"' : 'disabled="disabled"') .'" />'. $LANG->getHelp('helpSoaPrimaryG');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###PREFS_SOA_PRIMARY###', '');
+		}
+		if ($TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] == true) {
+			$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
+			$markerArray['input_soa_hostmaster'] = '<input type="checkbox" name="temp_soa_hostmaster_chk" value="1" onchange="toggleFields(this, \'pref_DNS_soaHostmaster|1|\', \'pref_DNS_soaHostmaster|0|\', \'group_config\');" '. (lib_div::isset_value($prefArr, 'DNS=>soaHostmaster') ? 'checked' : '') .' />&nbsp;<input type="text" name="pref_DNS_soaHostmaster" class="'. STYLE_FIELD .'" size="30" alt="email|bok" emsg="'. $LANG->getLang('soaHostmasterError') .'" '. (lib_div::isset_value($prefArr, 'DNS=>soaHostmaster') ? 'value="'. $prefArr['DNS']['soaHostmaster'] .'"' : 'disabled="disabled"') .'" />'. $LANG->getHelp('helpPrefsDefaultSoaHostmaster');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###PREFS_SOA_HOSTMASTER###', '');
+		}
 		$markerArray['label_notice'] = $LANG->getLang('labelNotice');
 		$markerArray['textarea_notice'] = '<textarea name="notice" class="'. STYLE_FIELD .'" rows="6" cols="40" wrap="on">'. (lib_div::isset_value($row, 'notice') ? $row['notice'] : '') .'</textarea>';
 
@@ -122,7 +132,7 @@ class tupa_groups {
 
 				// Substitute markers
 		$subpart = $TBE_TEMPLATE->substituteMarkerArray($subpart, $markerArray, '###|###', '1');
-		$content .= $TBE_TEMPLATE->wrapInFormTags($subpart, 'processGroup(document.forms[0]);');
+		$content .= $TBE_TEMPLATE->wrapInFormTags($subpart, 'processGroup(document.forms[0]);', 'group_config');
 
 		return $content;
 	}

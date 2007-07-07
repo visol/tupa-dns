@@ -100,11 +100,11 @@ class lib_menu {
 			$content .= '<p class="menu1"><a href="javascript:void(0);" onclick="'. $this->startPageArr['users'] .'"><img src="'. $icons['usr']['path'] .'" '. $icons['usr']['size'][3] .' border="0" alt="'. $LANG->getLang('menuUsers') .'" /> '. $LANG->getLang('menuUsers') .'</a></p>';
 		}
 
-		if ($USER->hasPerm('menu_tools')) {
+/*		if ($USER->hasPerm('menu_tools')) {
 			$this->startPageArr['tool'] = 'showTools(); this.blur(this);';
 			$content .= '<p class="menu1"><a href="javascript:void(0);" onclick="'. $this->startPageArr['tool'] .'"><img src="'. $icons['tool']['path'] .'" '. $icons['tool']['size'][3] .' border="0" alt="'. $LANG->getLang('menuTools') .'" /> '. $LANG->getLang('menuTools') .'</a></p>';
 		}
-
+*/
 		if ($USER->hasPerm('menu_logging')) {
 			$this->startPageArr['logging'] = 'setConf(\'show=>page\', \'1\', true, true); showLogMessages(); this.blur(this);';
 			$content .= '<p class="menu1"><a href="javascript:void(0);" onclick="'. $this->startPageArr['logging'] .'"><img src="'. $icons['log']['path'] .'" '. $icons['log']['size'][3] .' border="0" alt="'. $LANG->getLang('menuLogging') .'" /> '. $LANG->getLang('menuLogging') .'</a></p>';
@@ -127,7 +127,7 @@ class lib_menu {
 		// Check start page an load it if exists
 		if ($this->startPage != '' && key_exists($this->startPage, $this->startPageArr)) {
 			$content .= $TBE_TEMPLATE->wrapScriptTags(
-				'document.onload = '. $this->startPageArr[$this->startPage]
+				'd.onload = '. $this->startPageArr[$this->startPage]
 			);
 		}
 

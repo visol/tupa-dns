@@ -143,7 +143,7 @@ class sysinfo {
 		$results['swap']['used'] = $this->kstat('unix:0:vminfo:swap_alloc') / 1024;
 		$results['swap']['free'] = $this->kstat('unix:0:vminfo:swap_free') / 1024;
 		$results['swap']['percent'] = round(($ar_buf[1] * 100) / $ar_buf[0]);
-		$results['swap']['percent'] = round(($results['swap']['used'] * 100) / $results['swap']['total']);
+		$results['swap']['percent'] = $results['swap']['total'] > 0 ? round(($results['swap']['used'] * 100) / $results['swap']['total']) : 0;
 		return $results;
 	}
 

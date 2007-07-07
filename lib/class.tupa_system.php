@@ -562,7 +562,7 @@ class tupa_system {
 		}
 
 		// Update view
-		if (!$skipSuccessMsg) $TBE_TEMPLATE->addMessage('', '', 'get'. lib_div::firstUpper($part) .'MgrUpdate('. $conf['data']['rInfo'] .');');
+		if (!$skipSuccessMsg) $TBE_TEMPLATE->addMessage('', '', 'get'. lib_div::firstUpper($part) .'MgrUpdate('. (lib_div::isset_value($conf, 'data=>rInfo') ? $conf['data']['rInfo'] : '') .');');
 
 		// Language was successfully deleted
 		if (!$skipSuccessMsg) $TBE_TEMPLATE->addMessage('success', $LANG->getLang('system'. lib_div::firstUpper($part) .'DeleteSuccess', array('item' => $id)));

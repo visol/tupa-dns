@@ -1,3 +1,39 @@
+2007-06-29	Urs Weiss	<urs@tupa-dns.org>
+	- Changed JavaScript function "toggleFields" to delete content if empty value set
+
+2007-06-27	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed bug with undefined index when a skin or language was deleted and no "rInfo" was set
+	- Bug in start.php fixed where skin-falback not worked
+	- Unusable backup interface when debugMode is enabled fixed
+
+2007-06-26	Urs Weiss	<urs@tupa-dns.org>
+	- Changed "missing config_site.inc.php" message a bit
+	- Changed some text in the installer script
+	- Added "INSTALLER EDIT POINT TOKEN" to the config_site-dist.inc.php file to prevent double defined values from the installer
+	- Fixed "Only variable references should be returned by reference" notice in lib_div::makeInstance
+	- Commented out "Tools" section for next release.
+	- Fixed bug which produced an error when the system has no swap space (Bug-ID: 0000038)
+	- Removed unneeded config_site.inc.php inclusion in index.php
+	- Added configuration option to add additional TLD's which are not deleted on TUPA updates (Bug-ID: 0000035)
+	- Fixed typo in "lib/class.tupa_domains.php" (Bug-ID: 0000039)
+
+2007-05-04	Urs Weiss	<urs@tupa-dns.org>
+	- Replaced Javascript to generate select options with a version which works with Apples Safari (Bug-ID: 0000008)
+	- Added fix from bug report to check if value is an array (Bug-ID: 0000018)
+	- Replaced the tabs with spaces in lib/js/md5.js (Bug-ID: 0000021)
+	- Updated IPv4 RegEx to mach an IP exactly
+
+2007-05-03	Urs Weiss	<urs@tupa-dns.org>
+	- Some very small fixes
+	- Fixed multiple problems when selecting multiple domains/templates to delete
+	- Changed menu-style (on the left) to be clickable over the whole width
+	- It's now possible to configure if the domain name itself should be editeable (Bug-ID: 0000003)
+	- Now filters out identical domain names when adding domains with a template
+	- Fixed bug when inserting mutiple domains with template in IE (Bug-ID: 0000005)
+	
+2007-03-22	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed SRV RegEx (Bug-ID: 0000020)
+
 2006-09-14	Urs Weiss	<urs@tupa-dns.org>
 	- Added top level domains (cat, jobs, mobi, pro, tel, travel)
 

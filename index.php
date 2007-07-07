@@ -70,8 +70,9 @@ $markerArray['style_sheet'] = '<link rel="stylesheet" type="text/css" href="logi
 $markerArray['js_md5'] = '<script type="text/javascript" src="lib/js/md5.js"></script>';
 $markerArray['js_crypt_pass'] = $TBE_TEMPLATE->wrapScriptTags('
 				function cryptPass() {
-					password = document.loginform.password.value;
-					tmphash = document.loginform.tmphash.value;
+					var password = document.loginform.password.value;
+					var tmphash = document.loginform.tmphash.value;
+
 					if (password && tmphash) {
 						document.loginform.pfield.value = MD5(MD5(password) + tmphash);
 						document.loginform.password.value = "";

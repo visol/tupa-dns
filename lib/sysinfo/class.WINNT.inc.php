@@ -149,7 +149,7 @@ class sysinfo {
 			$k += 1;
 		}
 
-		$results['swap']['percent'] = round($results['swap']['used'] / $results['swap']['total'] * 100);
+		$results['swap']['percent'] = $results['swap']['total'] > 0 ? round($results['swap']['used'] / $results['swap']['total'] * 100) : 0;
 
 		return $results;
 	}

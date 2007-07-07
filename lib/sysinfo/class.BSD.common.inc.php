@@ -138,7 +138,7 @@ class bsd_common {
 				$results['swap']['free'] = $results['swap']['free'] + $ar_buf[3];
 			}
 		}
-		$results['swap']['percent'] = round(($results['swap']['used'] * 100) / $results['swap']['total']);
+		$results['swap']['percent'] = $results['swap']['total'] > 0 ? round(($results['swap']['used'] * 100) / $results['swap']['total']) : 0;
 
 		return $results;
 	}

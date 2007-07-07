@@ -90,8 +90,18 @@ class tupa_preferences {
 		$markerArray['input_rows_per_site'] = '<input type="text" name="pref_PREFS_linesPerSite" class="'. STYLE_FIELD .'" size="5" alt="number|0|'. $TUPA_CONF_VARS['PREFS']['minLinesPerSite'] .'|'. $TUPA_CONF_VARS['PREFS']['maxLinesPerSite'] .'" emsg="'. $LANG->getLang('rowsPerSiteError', array('min'=>$TUPA_CONF_VARS['PREFS']['minLinesPerSite'], 'max'=>$TUPA_CONF_VARS['PREFS']['maxLinesPerSite'])) .'" value="'. $TUPA_CONF_VARS['PREFS']['linesPerSite'] .'" />'. $LANG->getHelp('helpPrefsLinesPerSite');
 		$markerArray['label_navi_show_pages'] = $LANG->getLang('labelNaviShowPages');
 		$markerArray['input_navi_show_pages'] = '<input type="text" name="pref_PREFS_naviShowPages" class="'. STYLE_FIELD .'" size="5" alt="number|0|'. $TUPA_CONF_VARS['PREFS']['minNaviShowPages'] .'|'. $TUPA_CONF_VARS['PREFS']['maxNaviShowPages'] .'" emsg="'. $LANG->getLang('naviShowPagesError', array('min'=>$TUPA_CONF_VARS['PREFS']['minNaviShowPages'], 'max'=>$TUPA_CONF_VARS['PREFS']['maxNaviShowPages'])) .'" value="'. $TUPA_CONF_VARS['PREFS']['naviShowPages'] .'" />'. $LANG->getHelp('helpPrefsNaviShowPages');
-		$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
-		$markerArray['input_soa_primary'] = '<input type="text" name="pref_DNS_defaultSoaPrimary" class="'. STYLE_FIELD .'" size="30" alt="blank" emsg="'. $LANG->getLang('soaPrimaryError') .'" value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'] .'" />'. $LANG->getHelp('helpPrefsDefaultSoaPimary');
+		if ($TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] == true) {
+			$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
+			$markerArray['input_soa_primary'] = '<input type="text" name="pref_DNS_defaultSoaPrimary" class="'. STYLE_FIELD .'" size="30" alt="blank" emsg="'. $LANG->getLang('soaPrimaryError') .'" value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'] .'" />'. $LANG->getHelp('helpPrefsDefaultSoaPimary');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###PREFS_SOA_PRIMARY###', '');
+		}
+		if ($TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] == true) {
+			$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
+			$markerArray['input_soa_hostmaster'] = '<input type="text" name="pref_DNS_defaultSoaHostmaster" class="'. STYLE_FIELD .'" size="30" alt="email" emsg="'. $LANG->getLang('soaHostmasterError') .'" value="'. $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'] .'" />'. $LANG->getHelp('helpPrefsDefaultSoaHostmaster');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###PREFS_SOA_HOSTMASTER###', '');
+		}
 
 		if ($USER->hasPerm('logging_show')) {
 			$maxSelectOptions = $TBE_TEMPLATE->logMaxSelectOptions($TUPA_CONF_VARS['LOGGING']['itemAmount']);

@@ -214,6 +214,11 @@ class tupa_sysinfo {
 				} else return $value;
 				break;
 			case 'network':
+				if(!is_array($value)) {
+					$output = $LANG->getLang('sysInfoNetInfoUnavailable');
+					break;
+				}
+
 				$output = '<table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 					<td><strong>'. $LANG->getLang('labelSysInterface') .'</strong></td><td><strong>'. $LANG->getLang('labelSysReceived') .'</strong></td><td><strong>'. $LANG->getLang('labelSysSent') .'</strong></td><td><strong>'. $LANG->getLang('labelSysErrorDrop') .'</strong></td></tr>';
 				foreach ($value as $ifName => $ifArray) {
@@ -228,6 +233,11 @@ class tupa_sysinfo {
 				$output .= '</table>';
 				break;
 			case 'memory':
+				if(!is_array($value)) {
+					$output = $LANG->getLang('sysInfoMemInfoUnavailable');
+					break;
+				}
+				
 				$output = '<table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 					<td><strong>'. $LANG->getLang('labelSysType') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysTotal') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysUsed') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysFree') .'</strong></td><td><strong>'. $LANG->getLang('labelSysPercent') .'</strong></td><td width="1%" align="right">&nbsp;</td></tr>';
 				foreach ($value as $memName => $memArray) {
@@ -246,6 +256,11 @@ class tupa_sysinfo {
 				$output .= '</table>';
 				break;
 			case 'filesystem':
+				if(!is_array($value)) {
+					$output = $LANG->getLang('sysInfoFsInfoUnavailable');
+					break;
+				}
+				
 				$output = '<table width="100%" cellspacing="0" cellpadding="0" border="0"><tr>
 					<td><strong>'. $LANG->getLang('labelSysMount') .'</strong></td><td><strong>'. $LANG->getLang('labelSysType') .'</strong></td><td><strong>'. $LANG->getLang('labelSysPartition') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysTotal') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysUsed') .'</strong></td><td align="right"><strong>'. $LANG->getLang('labelSysFree') .'</strong></td><td><strong>'. $LANG->getLang('labelSysPercent') .'</strong></td><td width="1%" align="right">&nbsp;</td></tr>';
 				//$output = print_r($value, true);

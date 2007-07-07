@@ -175,27 +175,33 @@ class sysinfo {
 			$results['ram']['used'] = $results['ram']['total'] - $results['ram']['free'];
 			$results['swap']['used'] = $results['swap']['total'] - $results['swap']['free'];
 
-			$swaps = lib_div::getFileRtrim('/proc/swaps');
-			while (list(,$swap) = each($swaps)) {
-				$swapdevs[] = $swap;
+			if (file_exists('/proc/swaps') && count(file('/proc/swaps')) > 1) {
+				$swaps = lib_div::getFileRtrim('/proc/swaps');
+				
+				while (list(,$swap) = each($swaps)) {
+					$swapdevs[] = $swap;
+				}
+	
+				for ($i = 1; $i < (count($swapdevs) - 1); $i++) {
+					$ar_buf = preg_split('/\s+/', $swapdevs[$i], 6);
+	
+					$results['devswap'][$i - 1] = array();
+					$results['devswap'][$i - 1]['dev'] = $ar_buf[0];
+					$results['devswap'][$i - 1]['total'] = $ar_buf[2];
+					$results['devswap'][$i - 1]['used'] = $ar_buf[3];
+					$results['devswap'][$i - 1]['free'] = ($results['devswap'][$i - 1]['total'] - $results['devswap'][$i - 1]['used']);
+					$results['devswap'][$i - 1]['percent'] = round(($ar_buf[3] * 100) / $ar_buf[2]);
+				}
+			} else {
+				$results['devswap'] = array();
 			}
-
-			for ($i = 1; $i < (count($swapdevs) - 1); $i++) {
-				$ar_buf = preg_split('/\s+/', $swapdevs[$i], 6);
-
-				$results['devswap'][$i - 1] = array();
-				$results['devswap'][$i - 1]['dev'] = $ar_buf[0];
-				$results['devswap'][$i - 1]['total'] = $ar_buf[2];
-				$results['devswap'][$i - 1]['used'] = $ar_buf[3];
-				$results['devswap'][$i - 1]['free'] = ($results['devswap'][$i - 1]['total'] - $results['devswap'][$i - 1]['used']);
-				$results['devswap'][$i - 1]['percent'] = round(($ar_buf[3] * 100) / $ar_buf[2]);
-			}
+			
 			// I don't like this since buffers and cache really aren't
 			// 'used' per say, but I get too many emails about it.
 			$results['ram']['t_used'] = $results['ram']['used'];
 			$results['ram']['t_free'] = $results['ram']['total'] - $results['ram']['t_used'];
 			$results['ram']['percent'] = round(($results['ram']['t_used'] * 100) / $results['ram']['total']);
-			$results['swap']['percent'] = round(($results['swap']['used'] * 100) / $results['swap']['total']);
+			$results['swap']['percent'] = $results['swap']['total'] > 0 ? round(($results['swap']['used'] * 100) / $results['swap']['total']) : 0;
 		} else {
 			$results['ram'] = array();
 			$results['swap'] = array();

@@ -166,7 +166,11 @@ class tupa_domains {
 
 		// Template name
 		$markerArray['label_domain'] = $LANG->getLang('labelDomain');
-		$markerArray['input_domain'] = '<input type="text" name="name" class="'. STYLE_FIELD .'" size="30" alt="custom" pattern="'. $TUPA_CONF_VARS['REGEX']['domain'] .'" emsg="'. $LANG->getLang('domainError') .'" '. (lib_div::isset_value($row, 'name') ? 'value="'. $row['name'] .'"' : '') .' />'. $LANG->getHelp('helpDomainsDomain');
+		if ($TUPA_CONF_VARS['DNS']['allowDomainNameChange'] == true) {
+			$markerArray['input_domain'] = '<input type="text" name="name" class="'. STYLE_FIELD .'" size="30" alt="custom" pattern="'. $TUPA_CONF_VARS['REGEX']['domain'] .'" emsg="'. $LANG->getLang('domainError') .'" '. (lib_div::isset_value($row, 'name') ? 'value="'. $row['name'] .'"' : '') .' />'. $LANG->getHelp('helpDomainsDomain');
+		} else {
+			$markerArray['input_domain'] = $row['name'];
+		}
 
 		// Owner selection
 		if ($USER->hasPerm('domains_'. $cmd .'_group') && $USER->hasPerm('users_show_group')) {
@@ -177,10 +181,18 @@ class tupa_domains {
 		}
 
 		$markerArray['template_soa_subtitle'] = $LANG->getLang('templateSoaSubtitle');
-		$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
-		$markerArray['input_soa_primary'] = '<input type="text" name="soa_primary" class="'. STYLE_FIELD .'" size="30" alt="custom" pattern="'. $TUPA_CONF_VARS['REGEX']['templateDomain'] .'" emsg="'. $LANG->getLang('soaPrimaryError') .'" '. (lib_div::isset_value($soa, '0') ? 'value="'. $soa['0'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary']) .'" />'. $LANG->getHelp('helpSoaPrimary');
-//		$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
-//		$markerArray['input_soa_hostmaster'] = '<input type="text" name="soa_hostmaster" class="'. STYLE_FIELD .'" size="30" alt="email" emsg="'. $LANG->getLang('soaHostmasterError') .'" '. (lib_div::isset_value($soa, '1') ? 'value="'. $soa['1'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster']) .'" />';
+		if ($TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] == true) {
+			$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
+			$markerArray['input_soa_primary'] = '<input type="text" name="soa_primary" class="'. STYLE_FIELD .'" size="30" alt="custom|bok" pattern="'. $TUPA_CONF_VARS['REGEX']['templateDomain'] .'" emsg="'. $LANG->getLang('soaPrimaryError') .'" '. (lib_div::isset_value($soa, '0') ? 'value="'. $soa['0'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary']) .'" />'. $LANG->getHelp('helpSoaPrimary');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###DOMAIN_SOA_PRIMARY###', '');
+		}
+		if ($TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] == true) {
+			$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
+			$markerArray['input_soa_hostmaster'] = '<input type="text" name="soa_hostmaster" class="'. STYLE_FIELD .'" size="30" alt="email|bok" emsg="'. $LANG->getLang('soaHostmasterError') .'" '. (lib_div::isset_value($soa, '1') ? 'value="'. $soa['1'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster']) .'" />'. $LANG->getHelp('helpSoaHostmaster');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###DOMAIN_SOA_HOSTMASTER###', '');
+		}
 		$markerArray['label_soa_refresh'] = $LANG->getLang('labelSoaRefresh');
 		$tmpVarArr = array('min'=>$TUPA_CONF_VARS['DNS']['minSoaRefresh'], 'max'=>$TUPA_CONF_VARS['DNS']['maxSoaRefresh']);
 		$markerArray['input_soa_refresh'] = '<input type="text" name="soa_refresh" class="'. STYLE_FIELD .'" size="10" alt="number|0|'. $TUPA_CONF_VARS['DNS']['minSoaRefresh'] .'|'. $TUPA_CONF_VARS['DNS']['maxSoaRefresh'] .'" emsg="'. $LANG->getLang('soaRefreshError', $tmpVarArr) .'" '. (lib_div::isset_value($soa, '3') ? 'value="'. $soa['3'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaRefresh']) .'" />'. $LANG->getHelp('helpSoaRefresh', $tmpVarArr);
@@ -366,7 +378,7 @@ class tupa_domains {
 			return ;
 		}
 		// delete owner-domain relation:
-		$res = $GLOBALS['TUPA_DB']->exec_DELETEquery('domain_owners', 'usr_id IN ('. lib_DB::fullQuoteStrList($conf['data']['id']) .')');
+		$res = $GLOBALS['TUPA_DB']->exec_DELETEquery('domain_owners', 'dom_id IN ('. lib_DB::fullQuoteStrList($conf['data']['id']) .')');
 		if (mysql_error()) {
 			$TBE_TEMPLATE->addMessage('error', $LANG->getLang('dbErrorExt', array('message' => $LANG->getLang('deleteDomainRelationDbError'), 'mysqlError' => mysql_error())));
 			lib_logging::addLogMessage('domains', 'delete', 'db', 'logMsgDbError', array('mysqlError' => mysql_error()));
@@ -375,7 +387,9 @@ class tupa_domains {
 
 		// add Log messages for all domains
 		foreach ($domainNames as $domainName) {
-			lib_logging::addLogMessage('domains', 'delete', 'info', 'logMsgDomainDelete', array('domainName' => $domainName));
+			if ($domainName != '') {
+				lib_logging::addLogMessage('domains', 'delete', 'info', 'logMsgDomainDelete', array('domainName' => $domainName));
+			}
 		}
 
 		if ($idCount <= 1) {
@@ -508,8 +522,12 @@ class tupa_domains {
 					break;
 				}
 
+				// Remove \r's
+				$fd['data']['domains'] = str_replace("\r", '', $fd['data']['domains']);
 				// Split Domains into an array and check for non domains
 				$domArr = explode("\n", $fd['data']['domains']);
+				$domArr = array_unique($domArr);
+				$TBE_TEMPLATE->addMessage('debug', nl2br(print_r($domArr, true)));
 				$regexDomain = '/'. $TUPA_CONF_VARS['REGEX']['domain'] .'/';
 
 				// Check amount of domains
@@ -560,9 +578,10 @@ class tupa_domains {
 					}
 				}
 				$tmplRecordsArr['data']['owner'] = $fd['data']['owner'];
-				//$TBE_TEMPLATE->addMessage('debug', nl2br(print_r($tmplRecordsArr, true)));
+				//$TBE_TEMPLATE->addMessage('debug', nl2br(print_r($domArr, true)));
 				foreach ($domArr as $value) {
 					$tmplRecordsArr['data']['name'] = $value;
+					//$TBE_TEMPLATE->addMessage('debug', nl2br(print_r($tmplRecordsArr, true)));
 					tupa_domains::insertDomainData($tmplRecordsArr, $conf);
 				}
 				// Clean example div
@@ -572,11 +591,15 @@ class tupa_domains {
 			case 'edit':
 				$id = $fd['hidden']['id'];
 				settype($id, 'integer');
-				// Check permissions
+				// Check permissions and Check that no domain was submitted if not allowed
 				if (!($USER->hasPerm('domains_edit') && $USER->isOwnerOfRecord($id, $conf['csite']) || $USER->hasPerm('domains_edit_group') && $USER->isOwnerOfRecord($id, $conf['csite'], true))) {
 					$TBE_TEMPLATE->noPermissionMessage();
 					lib_logging::addLogMessage('domains', 'edit', 'permission', 'logMsgNoPermission');
 					break;
+				}
+				// Set domain name if not allowed to submit one
+				if ($TUPA_CONF_VARS['DNS']['allowDomainNameChange'] == '') {
+					$fd['data']['name'] = $GLOBALS['TUPA_DB']->exec_SELECTgetDomainName($id);
 				}
 
 				// Clean the data a bit (Remove HTML/PHP tags, add slashes)
@@ -625,15 +648,16 @@ class tupa_domains {
 				}
 
 				// Set the SOA record in $dataArr
-				$soaHostmaster = $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
+				$soaPrimary = $TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] && lib_div::isset_value($fd, 'data=>soa_primary') ? $fd['data']['soa_primary'] : $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'];
+				$soaHostmaster = $TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] && isset($fd['data']['soa_hostmaster']) && lib_div::validEmail($fd['data']['soa_hostmaster']) ? $fd['data']['soa_hostmaster'] : $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
 				$dataArr['0']['name'] = '';
 				$dataArr['0']['ttl'] = $fd['data']['soa_ttl'];
 				$dataArr['0']['type'] = 'SOA';
 				$dataArr['0']['domain_id'] = $id;
 				$dataArr['0']['id'] = $soa_id;
-				$dataArr['0']['content'] = $fd['data']['soa_primary'] .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
+				$dataArr['0']['content'] = $soaPrimary .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
 				// Unset SOA data
-				unset($fd['data']['soa_primary'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
+				unset($fd['data']['soa_primary'], $fd['data']['soa_hostmaster'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
 
 //				$TBE_TEMPLATE->addMessage('debug', nl2br(print_r($fd, true)));
 				$dataArr = lib_div::array_merge($dataArr, lib_div::parseRecordsToArray($fd, 'domain_id', $id));
@@ -827,7 +851,7 @@ class tupa_domains {
 		$ownerId = isset($fd['data']['owner']) ? $fd['data']['owner'] : $_SESSION['uid'];
 		unset($fd['data']['owner'], $fd['data']['owner_group']);
 
-		// Clean the data a bit (Remove HTML/PHP tags, ass slashes)
+		// Clean the data a bit (Remove HTML/PHP tags, add slashes)
 		lib_div::stripTagsOnArray($fd);
 		lib_div::addSlashesOnArray($fd);
 
@@ -849,13 +873,14 @@ class tupa_domains {
 		unset($fd['data']['name']);
 
 		// Set the SOA record in $dataArr
-		$soaHostmaster = $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
+		$soaPrimary = $TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] && isset($fd['data']['soa_primary']) ? $fd['data']['soa_primary'] : $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'];
+		$soaHostmaster = $TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] && isset($fd['data']['soa_hostmaster']) && lib_div::validEmail($fd['data']['soa_hostmaster']) ? $fd['data']['soa_hostmaster'] : $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
 		$dataArr['0']['name'] = '';
 		$dataArr['0']['ttl'] = $fd['data']['soa_ttl'];
 		$dataArr['0']['type'] = 'SOA';
-		$dataArr['0']['content'] = $fd['data']['soa_primary'] .' '. $soaHostmaster .' '. $fd['hidden']['soa_serial'] .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
+		$dataArr['0']['content'] = $soaPrimary .' '. $soaHostmaster .' '. $fd['hidden']['soa_serial'] .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
 		// Unset SOA data
-		unset($fd['data']['soa_primary'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
+		unset($fd['data']['soa_primary'], $fd['data']['soa_hostmaster'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
 
 		// Check SOA record
 		$error = lib_div::checkRecordFields($dataArr);

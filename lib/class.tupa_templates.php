@@ -166,10 +166,18 @@ class tupa_templates {
 		}
 
 		$markerArray['template_soa_subtitle'] = $LANG->getLang('templateSoaSubtitle');
-		$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
-		$markerArray['input_soa_primary'] = '<input type="text" name="soa_primary" class="'. STYLE_FIELD .'" size="30" alt="custom" pattern="'. $TUPA_CONF_VARS['REGEX']['templateDomain'] .'" emsg="'. $LANG->getLang('soaPrimaryError') .'" '. (lib_div::isset_value($soa, '0') ? 'value="'. $soa['0'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary']) .'" />'. $LANG->getHelp('helpSoaPrimary');
-//		$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
-//		$markerArray['input_soa_hostmaster'] = '<input type="text" name="soa_hostmaster" class="'. STYLE_FIELD .'" size="30" alt="email" emsg="'. $LANG->getLang('soaHostmasterError') .'" '. (lib_div::isset_value($soa, '1') ? 'value="'. $soa['1'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster']) .'" />';
+		if ($TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] == true) {
+			$markerArray['label_soa_primary'] = $LANG->getLang('labelSoaPrimary');
+			$markerArray['input_soa_primary'] = '<input type="text" name="soa_primary" class="'. STYLE_FIELD .'" size="30" alt="custom|bok" pattern="'. $TUPA_CONF_VARS['REGEX']['templateDomain'] .'" emsg="'. $LANG->getLang('soaPrimaryError') .'" '. (lib_div::isset_value($soa, '0') ? 'value="'. $soa['0'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaPrimary']) .'" />'. $LANG->getHelp('helpSoaPrimary');
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###TEMPLATE_SOA_PRIMARY###', '');
+		}
+		if ($TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] == true) {
+			$markerArray['label_soa_hostmaster'] = $LANG->getLang('labelSoaHostmaster');
+			$markerArray['input_soa_hostmaster'] = '<input type="text" name="soa_hostmaster" class="'. STYLE_FIELD .'" size="30" alt="email|bok" emsg="'. $LANG->getLang('soaHostmasterError') .'" '. (lib_div::isset_value($soa, '1') ? 'value="'. $soa['1'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster']) .'" />';
+		} else {
+			$subpart = $TBE_TEMPLATE->substituteSubpart($subpart, '###TEMPLATE_SOA_HOSTMASTER###', '');
+		}
 		$markerArray['label_soa_refresh'] = $LANG->getLang('labelSoaRefresh');
 		$tmpVarArr = array('min'=>$TUPA_CONF_VARS['DNS']['minSoaRefresh'], 'max'=>$TUPA_CONF_VARS['DNS']['maxSoaRefresh']);
 		$markerArray['input_soa_refresh'] = '<input type="text" name="soa_refresh" class="'. STYLE_FIELD .'" size="10" alt="number|0|'. $TUPA_CONF_VARS['DNS']['minSoaRefresh'] .'|'. $TUPA_CONF_VARS['DNS']['maxSoaRefresh'] .'" emsg="'. $LANG->getLang('soaRefreshError', $tmpVarArr) .'" '. (lib_div::isset_value($soa, '3') ? 'value="'. $soa['3'] .'"' : 'value="'. $TUPA_CONF_VARS['DNS']['defaultSoaRefresh']) .'" />'. $LANG->getHelp('helpSoaRefresh', $tmpVarArr);
@@ -390,12 +398,13 @@ class tupa_templates {
 				unset($fd['data']['name']);
 
 				// Set the SOA record in $dataArr
-				$soaHostmaster = $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
+				$soaPrimary = $TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] && isset($fd['data']['soa_primary']) ? $fd['data']['soa_primary'] : $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'];
+				$soaHostmaster = $TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] && isset($fd['data']['soa_hostmaster']) && lib_div::validEmail($fd['data']['soa_hostmaster']) ? $fd['data']['soa_hostmaster'] : $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
 				$dataArr['0']['ttl'] = $fd['data']['soa_ttl'];
 				$dataArr['0']['type'] = 'SOA';
-				$dataArr['0']['content'] = $fd['data']['soa_primary'] .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
+				$dataArr['0']['content'] = $soaPrimary .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
 				// Unset SOA data
-				unset($fd['data']['soa_primary'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
+				unset($fd['data']['soa_primary'], $fd['data']['soa_hostmaster'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
 
 				// Check SOA record
 				$error = lib_div::checkRecordFields($dataArr);
@@ -503,14 +512,15 @@ class tupa_templates {
 				}
 
 				// Set the SOA record in $dataArr
-				$soaHostmaster = $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
+				$soaPrimary = $TUPA_CONF_VARS['DNS']['allowSoaPrimaryChange'] && isset($fd['data']['soa_primary']) ? $fd['data']['soa_primary'] : $TUPA_CONF_VARS['DNS']['defaultSoaPrimary'];
+				$soaHostmaster = $TUPA_CONF_VARS['DNS']['allowSoaHostmasterChange'] && isset($fd['data']['soa_hostmaster']) && lib_div::validEmail($fd['data']['soa_hostmaster']) ? $fd['data']['soa_hostmaster'] : $TUPA_CONF_VARS['DNS']['defaultSoaHostmaster'];
 				$dataArr['0']['ttl'] = $fd['data']['soa_ttl'];
 				$dataArr['0']['type'] = 'SOA';
 				$dataArr['0']['tmpl_id'] = $id;
 				$dataArr['0']['id'] = $soa_id;
-				$dataArr['0']['content'] = $fd['data']['soa_primary'] .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
+				$dataArr['0']['content'] = $soaPrimary .' '. $soaHostmaster .' '. $soa_serial .' '. $fd['data']['soa_refresh'] .' '. $fd['data']['soa_retry'] .' '. $fd['data']['soa_expire'] .' '. $fd['data']['soa_ttl'];
 				// Unset SOA data
-				unset($fd['data']['soa_primary'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
+				unset($fd['data']['soa_primary'], $fd['data']['soa_hostmaster'], $fd['data']['soa_refresh'], $fd['data']['soa_retry'], $fd['data']['soa_expire'], $fd['data']['soa_ttl']);
 
 				// Check SOA record
 				$error = lib_div::checkRecordFields($dataArr);

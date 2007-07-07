@@ -406,6 +406,7 @@ class lib_userauth {
 	 * @return	boolean
 	 */
 	function isOwnerOfRecord($recordId, $table, $checkGroup=false) {
+		// Give admins all permissions
 		if ($this->getPerm('ADM=>admin') || $this->hasPerm($table .'_admin')) return true;
 
 		// Current id of logged in user
