@@ -1,3 +1,9 @@
+2007-07-17	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed typo in new IPv4 RegEx
+
+2007-07-09	Urs Weiss	<urs@tupa-dns.org>
+	- Fixed some typos in html templates
+
 2007-06-29	Urs Weiss	<urs@tupa-dns.org>
 	- Changed JavaScript function "toggleFields" to delete content if empty value set
 
