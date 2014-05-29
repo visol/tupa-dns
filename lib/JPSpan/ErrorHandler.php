@@ -42,6 +42,20 @@ if ( !defined('E_STRICT') ) {
     define('E_STRICT',2048);
 }
 
+/**
+* Ignore PHP5 deprecated messages
+*/
+if ( !defined('JPSPAN_IGNORE_DEPRECATED') ) {
+    define ('JPSPAN_IGNORE_DEPRECATED',TRUE);
+}
+
+/**
+* Define E_DEPRECATED
+*/
+if ( !defined('E_DEPRECATED') ) {
+    define('E_DEPRECATED', 8192);
+}
+
 
 //-----------------------------------------------------------------------------
 
@@ -76,6 +90,11 @@ function JPSpan_ErrorHandler($level, $message, $file, $line) {
                 return;
             }
             $code = 2004;
+        case E_DEPRECATED:
+            if ( JPSPAN_IGNORE_DEPRECATED ) {
+                return;
+            }
+            $code = 2000;
         default:
             if ( !JPSPAN_ERROR_MESSAGES ) {
                 $message = 'Server unable to respond';
