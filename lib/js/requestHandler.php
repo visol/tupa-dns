@@ -68,7 +68,7 @@ require_once(PATH_lib.'class.tupa_backup.php');
 
 
 // Create the PostOffice server
-$S = & new JPSpan_Server_PostOffice();
+$S = new JPSpan_Server_PostOffice();
 
 // Register your class with it...
 $S->addHandler(new tupa_general());

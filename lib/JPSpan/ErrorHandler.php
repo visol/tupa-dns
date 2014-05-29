@@ -95,7 +95,7 @@ function JPSpan_ErrorHandler($level, $message, $file, $line) {
         define ('JPSPAN',dirname(__FILE__).'/');
     }
     require_once JPSPAN . 'Monitor.php';
-    $M = & JPSpan_Monitor::instance();
+    $M = JPSpan_Monitor::instance();
     $M->announceError($name, $code, $message, $file, $line);
     
     // Must exit on any error in case of multiple errors
@@ -139,7 +139,7 @@ function JPSpan_ExceptionHandler($exception) {
         define ('JPSPAN',dirname(__FILE__).'/');
     }
     require_once JPSPAN . 'Monitor.php';
-    $M = & JPSpan_Monitor::instance();
+    $M = JPSpan_Monitor::instance();
     $M->announceError($name, $code, $message, $file, $exception->getLine());
     
     exit();

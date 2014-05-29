@@ -94,12 +94,12 @@ class JPSpan_Unserializer_XML {
         
             $class = $this->dict[$tag];
 
-            $current = & new $class($this, $attrs);
-            $this->stack[] = & $current;
+            $current = new $class($this, $attrs);
+            $this->stack[] = $current;
     
             
             if ( $tag == 'r' ) {
-                $this->root = & $current;
+                $this->root = $current;
             }
             
         }
@@ -162,7 +162,7 @@ class JPSpan_Unserializer_XML {
             return $data;
         }
         
-        $this->parser = & xml_parser_create('UTF-8');
+        $this->parser = xml_parser_create('UTF-8');
         xml_parser_set_option($this->parser, XML_OPTION_CASE_FOLDING, false);
         xml_set_object($this->parser, $this);
         xml_set_element_handler($this->parser, 'open', 'close');
@@ -222,7 +222,7 @@ class JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Node(& $Handler) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
     }
 
     /**
@@ -258,7 +258,7 @@ class JPSpan_Unserializer_XML_Root extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Root(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         $this->value = NULL;
     }
 
@@ -300,7 +300,7 @@ class JPSpan_Unserializer_XML_Null extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Null(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         $this->value = NULL;
     }
 
@@ -321,7 +321,7 @@ class JPSpan_Unserializer_XML_Boolean extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Boolean(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         
         if ( isset($attrs['v']) ) {
             $this->value = (bool)$attrs['v'];
@@ -348,7 +348,7 @@ class JPSpan_Unserializer_XML_Integer extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Integer(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         
         if ( isset($attrs['v']) ) {
             $this->value = (int)$attrs['v'];
@@ -375,7 +375,7 @@ class JPSpan_Unserializer_XML_Double extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Double(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         
         if ( isset($attrs['v']) ) {
             $this->value = (double)$attrs['v'];
@@ -412,7 +412,7 @@ class JPSpan_Unserializer_XML_String extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_String(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         $this->value = '';
     }
     
@@ -443,7 +443,7 @@ class JPSpan_Unserializer_XML_Array extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Array(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         $this->value = array();
     }
     
@@ -480,7 +480,7 @@ class JPSpan_Unserializer_XML_Object extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Object(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         
         if ( isset($attrs['c']) ) {
         
@@ -493,7 +493,7 @@ class JPSpan_Unserializer_XML_Object extends JPSpan_Unserializer_XML_Node {
                 return;
             }
             
-            $this->value = & new $class;
+            $this->value = new $class;
             
         } else {
             $errorMsg = 'Object node requires class attribute';
@@ -555,7 +555,7 @@ class JPSpan_Unserializer_XML_Element extends JPSpan_Unserializer_XML_Node {
     * @access protected
     */
     function JPSpan_Unserializer_XML_Element(& $Handler, $attrs) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
         
         if ( isset($attrs['k']) ) {
             $this->key = $attrs['k'];

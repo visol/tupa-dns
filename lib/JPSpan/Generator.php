@@ -41,8 +41,8 @@ class JPSpan_Generator {
     * @todo This method needs to die - just setup the ClientGenerator object
     */
     function init(& $ClientGenerator, & $descriptions, $serverUrl, $encoding) {
-        $this->ClientGenerator = & $ClientGenerator;
-        $this->ClientGenerator->descriptions = & $descriptions;
+        $this->ClientGenerator = $ClientGenerator;
+        $this->ClientGenerator->descriptions = $descriptions;
         $this->ClientGenerator->serverUrl = $serverUrl;
         $this->ClientGenerator->RequestEncoding = $encoding;
     }
@@ -54,7 +54,7 @@ class JPSpan_Generator {
     */
     function getClient() {
         require_once JPSPAN . 'CodeWriter.php';
-        $Code = & new JPSpan_CodeWriter();
+        $Code = new JPSpan_CodeWriter();
         $this->ClientGenerator->generate($Code);
         return $Code->toString();
     }
@@ -209,12 +209,12 @@ foreach ( $Description->methods as $method => $url ) {
 
     function getClient() {
         require_once JPSPAN . 'CodeWriter.php';
-        $Code = & new JPSpan_CodeWriter();
+        $Code = new JPSpan_CodeWriter();
         $this->generate($Code);
         $client = $Code->toString();
         
         require_once JPSPAN . 'Include.php';
-        $I = & JPSpan_Include::instance();
+        $I = JPSpan_Include::instance();
         
         // HACK - this needs to change
         $I->loadString(__FILE__,$client);

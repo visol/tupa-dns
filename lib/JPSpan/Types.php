@@ -73,7 +73,7 @@ class JPSpan_Error {
         $this->message = $message;
         
         require_once JPSPAN . 'Monitor.php';
-        $M = & JPSpan_Monitor::instance();
+        $M = JPSpan_Monitor::instance();
         $M->announceError($name, $code, $message, __FILE__, __LINE__);
     }
 }

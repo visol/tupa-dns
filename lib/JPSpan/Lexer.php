@@ -195,8 +195,8 @@ class JPSpan_Lexer {
 	function JPSpan_Lexer(&$parser, $start = "accept", $case = false) {
 		$this->_case = $case;
 		$this->_regexes = array();
-		$this->_parser = &$parser;
-		$this->_mode = &new JPSpan_LexerStateStack($start);
+		$this->_parser =$parser;
+		$this->_mode =new JPSpan_LexerStateStack($start);
 		$this->_mode_handlers = array();
 	}
 	

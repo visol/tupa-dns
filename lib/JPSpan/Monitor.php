@@ -50,7 +50,7 @@ class JPSpan_Monitor {
     * @access public
     */
     function addObserver(& $Observer) {
-        $this->observers[] = & $Observer;
+        $this->observers[] = $Observer;
     }
     
     /**

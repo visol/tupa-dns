@@ -49,7 +49,7 @@ if ( !function_exists('file_get_contents') ) {
 * @access public
 */
 function JPSpan_Include($file) {
-    $Includer = & JPSpan_Include::instance();
+    $Includer = JPSpan_Include::instance();
     $Includer->loadFile($file);
     register_shutdown_function('JPSpan_Include_Shutdown');
 }
@@ -63,7 +63,7 @@ function JPSpan_Include($file) {
 * @return void
 */
 function JPSpan_Include_Shutdown() {
-    $Includer = & JPSpan_Include::instance();
+    $Includer = JPSpan_Include::instance();
     echo $Includer->getCode();
 }
 
@@ -79,7 +79,7 @@ function JPSpan_Include_Shutdown() {
 * @access public
 */
 function JPSpan_Include_Register($file) {
-    $Includer = & JPSpan_Include::instance();
+    $Includer = JPSpan_Include::instance();
     $Includer->loadFile($file);
 }
 
@@ -150,7 +150,7 @@ function JPSpan_Include_ErrorReader($lang='en',$app=array(),$ser=array(),$cli=ar
     }
 
     
-    $Includer = & JPSpan_Include::instance();
+    $Includer = JPSpan_Include::instance();
     $Includer->loadString('errorreaderlist',$script);
 }
 
@@ -165,7 +165,7 @@ function JPSpan_Include_ErrorReader($lang='en',$app=array(),$ser=array(),$cli=ar
 * @access public
 */
 function JPSpan_Includes_Fetch() {
-    $Includer = & JPSpan_Include::instance();
+    $Includer = JPSpan_Include::instance();
     return $Includer->getCode();
 }
 
@@ -204,7 +204,7 @@ class JPSpan_Include {
     * @access private
     */
     function JPSpan_Include() {
-        $this->Manager = & new JPSpan_Include_Manager();
+        $this->Manager = new JPSpan_Include_Manager();
     }
     
     /**
@@ -305,7 +305,7 @@ class JPSpan_Include_Manager {
     
         if ( !in_array($name,$this->includes) ) {
             $this->includes[] = $name;
-            $File = & new JPSpan_Include_File($this);
+            $File = new JPSpan_Include_File($this);
             $File->parse($src);
             $this->code[$name] = $File->src;
             $this->resolveDependencies($File->includes);
@@ -375,7 +375,7 @@ class JPSpan_Include_File {
     * @access protected
     */
     function parse($src) {
-        $Parser = & new JPSpan_Include_Parser($this);
+        $Parser = new JPSpan_Include_Parser($this);
         $Parser->parse($src);
     }
     
@@ -440,7 +440,7 @@ class JPSpan_Include_Parser {
     * @access protected
     */
     function JPSpan_Include_Parser(& $Handler) {
-        $this->Handler = & $Handler;
+        $this->Handler = $Handler;
     }
     
     /**
@@ -450,7 +450,7 @@ class JPSpan_Include_Parser {
     * @access protected
     */
     function parse($src) {
-        $Lexer = & $this->getLexer();
+        $Lexer = $this->getLexer();
         $Lexer->parse($src);
     }
     

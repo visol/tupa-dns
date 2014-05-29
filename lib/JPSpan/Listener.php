@@ -49,7 +49,7 @@ class JPSpan_Listener {
     * @access public
     */
     function JPSpan_Listener() {
-        $this->Response = & new JPSpan_NullResponder();
+        $this->Response = new JPSpan_NullResponder();
     }
     
     /**
@@ -59,7 +59,7 @@ class JPSpan_Listener {
     * @access public
     */
     function setResponder(& $Responder) {
-        $this->Responder= & $Responder;
+        $this->Responder= $Responder;
     }
     
     /**

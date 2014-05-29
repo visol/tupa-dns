@@ -63,7 +63,7 @@ class JPSpan_Server_PostOffice extends JPSpan_Server {
     */
     function serve($sendHeaders = TRUE) {
         require_once JPSPAN . 'Monitor.php';
-        $M = & JPSpan_Monitor::instance();
+        $M = JPSpan_Monitor::instance();
         
         $this->calledClass = NULL;
         $this->calledMethod = NULL;
@@ -78,7 +78,7 @@ class JPSpan_Server_PostOffice extends JPSpan_Server {
             $M->setRequestInfo('class',$this->calledClass);
             $M->setRequestInfo('method',$this->calledMethod);
             
-            if ( FALSE !== ($Handler = & $this->getHandler($this->calledClass) ) ) {
+            if ( FALSE !== ($Handler = $this->getHandler($this->calledClass) ) ) {
             
                 $args = array();
                 $M->setRequestInfo('args',$args);
@@ -216,7 +216,7 @@ class JPSpan_Server_PostOffice extends JPSpan_Server {
     */
     function & getGenerator() {
         require_once JPSPAN . 'Generator.php';
-        $G = & new JPSpan_Generator();
+        $G = new JPSpan_Generator();
         $G->init(
             new JPSpan_PostOffice_Generator(),
             $this->descriptions,

@@ -119,7 +119,7 @@ class JPSpan_Server {
     function addHandler(& $Handle, $Description = NULL) {
         if ( is_null($Description) ) {
             if ( FALSE !== ($Description = JPSpan_Handle::examine($Handle)) ) {
-                $this->handlers[$Description->Class] = & $Handle;
+                $this->handlers[$Description->Class] = $Handle;
                 $this->descriptions[$Description->Class] = $Description;
             } else {
                 trigger_error('Invalid handle',E_USER_ERROR);
@@ -128,7 +128,7 @@ class JPSpan_Server {
             if ( isset($Description->Class) && is_string($Description->Class) && is_array($Description->methods) ) {
                 $Description->Class = strtolower($Description->Class);
                 $Description->methods = array_map('strtolower',$Description->methods);
-                $this->handlers[strtolower($Description->Class)] = & $Handle;
+                $this->handlers[strtolower($Description->Class)] = $Handle;
                 $this->descriptions[strtolower($Description->Class)] = $Description;
             } else {
                 trigger_error('Invalid description',E_USER_ERROR);
@@ -220,9 +220,9 @@ class JPSpan_Server {
     * @access public
     */
     function displayClient() {
-        $G = & $this->getGenerator();
+        $G = $this->getGenerator();
         require_once JPSPAN . 'Include.php';
-        $I = & JPSpan_Include::instance();
+        $I = JPSpan_Include::instance();
         
         // HACK - this needs to change
         $I->loadString(__FILE__,$G->getClient());
