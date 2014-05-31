@@ -139,7 +139,7 @@ class template {
 	 */
 
 	function wrapInFormTags($content, $JS_validated, $formName='formdata') {
-		return '<form action="#" name="'. $formName .'" onsubmit="cleanMessages(); if (validateForm(this,false,false,false,false,16)) { '. $JS_validated .' return false; } else { return false; }">'. $content .'</form>' . "\n";
+		return '<form novalidate="novalidate" action="#" name="'. $formName .'" onsubmit="cleanMessages(); if (validateForm(this,false,false,false,false,16)) { '. $JS_validated .' return false; } else { return false; }">'. $content .'</form>' . "\n";
 	}
 
 
