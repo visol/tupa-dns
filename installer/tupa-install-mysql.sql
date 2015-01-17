@@ -49,11 +49,11 @@ CREATE TABLE `domains` (
 CREATE TABLE `groups` (
   `id` int(11) unsigned NOT NULL auto_increment,
   `name` varchar(30) NOT NULL default '',
-  `notice` text NOT NULL,
+  `notice` text,
   `max_users` int(11) NOT NULL default '0',
   `max_domains` int(11) NOT NULL default '0',
   `max_templates` int(11) NOT NULL default '0',
-  `preferences` text NOT NULL,
+  `preferences` text,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
 
@@ -69,7 +69,7 @@ CREATE TABLE `logging` (
   `action` varchar(255) NOT NULL default '',
   `type` varchar(255) NOT NULL default '',
   `message` varchar(255) NOT NULL default '',
-  `message_repl` text NOT NULL,
+  `message_repl` text,
   `ip` varchar(46) NOT NULL default '',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
@@ -81,7 +81,7 @@ CREATE TABLE `logging` (
 CREATE TABLE `history` (
   `id` mediumint(11) unsigned NOT NULL auto_increment,
   `log_id` int(11) NOT NULL default '0',
-  `data` mediumtext NOT NULL,
+  `data` mediumtext,
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM;
 
@@ -154,11 +154,11 @@ CREATE TABLE `users` (
   `firstname` varchar(255) NOT NULL default '',
   `email` varchar(255) NOT NULL default '',
   `grp_id` int(11) NOT NULL default '0',
-  `notice` text NOT NULL,
+  `notice` text,
   `max_domains` int(11) NOT NULL default '0',
   `max_templates` int(11) NOT NULL default '0',
-  `permissions` text NOT NULL,
-  `preferences` text NOT NULL,
+  `permissions` text,
+  `preferences` text,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM;
@@ -171,7 +171,7 @@ CREATE TABLE `backup_config` (
   `email` varchar(255) NOT NULL default '',
   `compression` int(2) NOT NULL default '0',
   `save` int(2) NOT NULL default '0',
-  `dumpOptions` text NOT NULL,
+  `dumpOptions` text,
   `path_local` varchar(255) NOT NULL default '',
   `path_remote` varchar(255) NOT NULL default '',
   `protocol` int(2) NOT NULL default '0',
@@ -181,7 +181,7 @@ CREATE TABLE `backup_config` (
   `port` int(5) NOT NULL default '0',
   `username` varchar(255) NOT NULL default '',
   `password` varchar(255) NOT NULL default '',
-  `maintenance` text NOT NULL,
-  `time` text NOT NULL,
+  `maintenance` text,
+  `time` text,
   `next_exec` int(11) NOT NULL default '0'
 ) ENGINE=MyISAM;
