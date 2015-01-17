@@ -14,7 +14,7 @@ CREATE TABLE `authentication` (
   `ip` varchar(46) NOT NULL default '',
   `hash` varchar(32) NOT NULL default '0',
   PRIMARY KEY  (`sessionid`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `domain_owners`
@@ -24,7 +24,7 @@ CREATE TABLE `domain_owners` (
   `dom_id` int(11) NOT NULL default '0',
   `usr_id` int(11) NOT NULL default '0',
   KEY `dom_id` (`dom_id`,`usr_id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `domains`
@@ -40,7 +40,7 @@ CREATE TABLE `domains` (
   `account` varchar(40) default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `name_index` (`name`)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `groups`
@@ -55,7 +55,7 @@ CREATE TABLE `groups` (
   `max_templates` int(11) NOT NULL default '0',
   `preferences` text NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `logging`
@@ -72,7 +72,7 @@ CREATE TABLE `logging` (
   `message_repl` text NOT NULL,
   `ip` varchar(46) NOT NULL default '',
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `history`
@@ -83,7 +83,7 @@ CREATE TABLE `history` (
   `log_id` int(11) NOT NULL default '0',
   `data` mediumtext NOT NULL,
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `records`
@@ -103,7 +103,7 @@ CREATE TABLE `records` (
   KEY `rec_name_index` (`name`),
   KEY `nametype_index` (`name`,`type`),
   KEY `domain_id` (`domain_id`)
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `supermasters`
@@ -113,7 +113,7 @@ CREATE TABLE `supermasters` (
   `ip` varchar(25) NOT NULL default '',
   `nameserver` varchar(255) NOT NULL default '',
   `account` varchar(40) default NULL
-) TYPE=InnoDB;
+) ENGINE=InnoDB;
 
 --
 -- Table structure for table `template_records`
@@ -129,7 +129,7 @@ CREATE TABLE `template_records` (
   `prio` int(11) default NULL,
   `tupasorting` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `templates`
@@ -140,7 +140,7 @@ CREATE TABLE `templates` (
   `name` varchar(255) NOT NULL default '',
   `usr_id` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `users`
@@ -161,7 +161,7 @@ CREATE TABLE `users` (
   `preferences` text NOT NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`)
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
 
 --
 -- Table structure for table `backup_config`
@@ -184,4 +184,4 @@ CREATE TABLE `backup_config` (
   `maintenance` text NOT NULL,
   `time` text NOT NULL,
   `next_exec` int(11) NOT NULL default '0'
-) TYPE=MyISAM;
+) ENGINE=MyISAM;
