@@ -87,7 +87,7 @@ class lib_userauth {
 			// Set configured maxlifetime from config
 			$sessionTTL = $TUPA_CONF_VARS['SYS']['sessionTTL'];
 			ini_set('session.gc_maxlifetime', $sessionTTL);
-			if (session_is_registered($this->session_lastAccess) && $_SESSION[$this->session_lastAccess] > 0) {
+			if (isset($_SESSION[$this->session_lastAccess]) && $_SESSION[$this->session_lastAccess] > 0) {
 				if (time() > ($_SESSION[$this->session_lastAccess] + $sessionTTL)) {
 					$this->logout(true);
 				}
