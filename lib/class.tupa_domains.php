@@ -712,6 +712,7 @@ class tupa_domains {
 
 						// Add new record if no id is submitted
 						if ($dataRow['id'] == '') {
+							unset($dataRow['id']);
 							$res = $GLOBALS['TUPA_DB']->exec_INSERTquery('records', $dataRow);
 							$currentId = $GLOBALS['TUPA_DB']->sql_insert_id();
 						} else {
