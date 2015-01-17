@@ -418,7 +418,7 @@ class lib_config {
 							$statements['tables_count'][md5($statement)] = $count?'Records in table: '.$count:'';
 						} else {
 							$statement = 'CREATE TABLE '.$table." (\n".implode(",\n",$whole_table)."\n)";
-							$statement .= ($info['extra']['ttype']) ? ' TYPE='.$info['extra']['ttype'].';' : ';';
+							$statement .= ($info['extra']['ttype']) ? ' ENGINE='.$info['extra']['ttype'].';' : ';';
 							$statements['create_table'][md5($statement)]=$statement;
 						}
 					}
