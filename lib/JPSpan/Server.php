@@ -52,7 +52,7 @@ class JPSpan_Server {
     * @access public
     */
     function JPSpan_Server() {
-        if ( isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) == 'on' ) {
+        if (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') {
             $prot = 'https://';
         } else {
             $prot = 'http://';
