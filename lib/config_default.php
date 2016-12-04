@@ -64,6 +64,7 @@ $TUPA_CONF_VARS = array(
 		'optimizeJsCode' => 1,					// BOOLEAN |*| |*| if set to true the javascript code is optimized by removing unneeded stuff like comments, tabulators and line breakes. (You should only disable it for development)
 	),
 	'DNS' => array(				// DNS Related settings
+		'displayNameservers' => 0,				// BOOLEAN |*| |*| If set, current nameservers for all domains will be displayed in list view. EXPERIMENTAL!!
 		'defaultTTL' => 86400,					// NUMBER |*| number|0|3600|604800 |*| The default TTL for new DNS records.
 		'defaultPrio'	=> 20,						// NUMBER |*| number|0|1|65535 |*| The default priority for new DNS records.
 		'defaultSoaPrimary' => 'your.primary-ns-name.com',	// STRING |*| custom||^[a-zA-Z0-9][a-zA-Z0-9\-\.]*\.[a-zA-Z]{2,6} |*| The default primary nameserver for new SOA records.

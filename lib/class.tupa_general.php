@@ -424,8 +424,19 @@ class tupa_general {
 				$allowDelete1 = (($USER->hasPerm($conf['csite'] .'_admin, '. $conf['csite'] .'_delete_group')) OR ($USER->hasPerm($conf['csite'] .'_delete') && $row[($conf['csite'] == 'users' || $conf['csite'] == 'groups' ? 'id' : 'usr_id')] == $_SESSION['uid'])) ? true : false;
 
 				while (list(,$field) = each($showFieldsArr)) {
+					$nameservers = '';
+					if ($TUPA_CONF_VARS['DNS']['displayNameservers']) {
+						$domain = $row['name'];
+						$nameserver = array();
+						foreach (dns_get_record($domain,DNS_NS) as $record) {
+							$nameserver[] = $record['target'];
+						}
+
+						$nameservers = ' (' . implode(' ', $nameserver) . ')';
+					}
+
 					$markerArray['cell_class'] = $conf['csite'] .'-cell-'. $field;
-					$markerArray['cell'] = htmlspecialchars($row[$field]);
+					$markerArray['cell'] = htmlspecialchars($row[$field] . $nameservers);
 					$subpartSubContent .= $TBE_TEMPLATE->substituteMarkerArray($subpartSingleCell, $markerArray, '###|###', '1');
 				}
 
